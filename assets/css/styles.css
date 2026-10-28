@@ -154,9 +154,11 @@ svg { flex-shrink: 0; }
 }
 
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
-.brand__mark { width: 36px; height: 36px; }
-.brand__word { font-size: 1.42rem; font-weight: 800; letter-spacing: -.045em; line-height: 1; }
-.brand--light { color: #fff; }
+.brand__logo { display: block; height: 35px; width: auto; }
+.brand__logo--colour { display: none; }
+.site-header.is-solid .brand__logo--reversed, .nav-open .brand__logo--reversed { display: none; }
+.site-header.is-solid .brand__logo--colour, .nav-open .brand__logo--colour { display: block; }
+.site-footer .brand__logo { height: 38px; }
 
 .site-nav { display: flex; align-items: center; gap: 36px; }
 .site-nav__list { display: flex; gap: 32px; }
@@ -481,7 +483,7 @@ svg { flex-shrink: 0; }
 .download__fine svg { width: 18px; height: 18px; margin-top: 2px; color: var(--coral-ink); }
 .download__fine a { color: var(--navy); font-weight: 700; }
 .download__visual { position: relative; min-height: 440px; }
-.download__visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.download__visual > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .download__badge {
   position: absolute; left: 28px; bottom: 28px;
   display: flex; align-items: center; gap: 12px;
@@ -489,7 +491,7 @@ svg { flex-shrink: 0; }
   background: rgba(255, 255, 255, .92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   color: var(--navy); box-shadow: var(--shadow);
 }
-.download__badge .brand__mark { width: 34px; height: 34px; }
+.download__icon { width: 34px; height: 34px; }
 .download__badge strong { display: block; font-size: .95rem; letter-spacing: -.01em; }
 .download__badge span { display: block; font-size: .78rem; font-weight: 600; color: var(--gray-500); }
 

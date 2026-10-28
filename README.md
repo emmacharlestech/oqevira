@@ -7,7 +7,7 @@ index.html             page markup (all sections)
 assets/css/styles.css  design tokens, layout, phone mockups, responsive rules
 assets/js/main.js      launch config, header/menu, reveals, store buttons, signup form
 assets/img/            travel photography (Unsplash licence)
-assets/favicon.svg     proposed mark as favicon
+assets/brand/          official logo, icon, favicon and iOS touch icon (from the brand kit)
 ```
 
 To preview it, open `index.html` directly or serve the folder from any web server. For example, with XAMPP it runs at `http://localhost/oqevira/`.
@@ -35,7 +35,6 @@ Each one is marked `TODO(oqevira)` or `data-placeholder` in `index.html`.
 
 | Item | Where |
 | --- | --- |
-| Official logo / brand assets. The current mark (pin + "Q" + flight path) is a **proposal** | sprite `#oq-mark`, `assets/favicon.svg` |
 | App Store and Google Play URLs | `OQ_CONFIG` in `main.js` |
 | Email service / backend for launch updates | `OQ_CONFIG.signupEndpoint` |
 | Approved privacy wording under the signup form | `#signup-privacy` |

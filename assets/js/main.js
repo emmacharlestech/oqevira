@@ -48,12 +48,15 @@ const OQ_CONFIG = {
   if (reduceMotion.matches || !('IntersectionObserver' in window)) {
     revealEls.forEach((el) => el.classList.add('is-visible'));
   } else {
+    // Hero content animates in straight away rather than waiting on the observer.
+    const heroEls = document.querySelectorAll('.hero [data-reveal]');
+    requestAnimationFrame(() => requestAnimationFrame(() => heroEls.forEach((el) => el.classList.add('is-visible'))));
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-    revealEls.forEach((el) => io.observe(el));
+    revealEls.forEach((el) => { if (!el.closest('.hero')) io.observe(el); });
   }
 
   /* ---------- Gentle hero parallax (larger screens, motion allowed) ---------- */
