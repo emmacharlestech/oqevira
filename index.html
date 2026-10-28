@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Oqevira — Your next great story starts here</title>
   <meta name="description" content="Oqevira is an upcoming travel discovery app. Discover remarkable places, unforgettable experiences, and new ways to explore the world. Coming soon to iPhone and Android.">
   <meta name="theme-color" content="#14213D">
@@ -89,6 +89,7 @@
     </button>
   </div>
 </header>
+<div class="nav-backdrop" data-nav-backdrop aria-hidden="true"></div>
 
 <main id="main">
 
@@ -341,6 +342,7 @@
           <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow-ur"/></svg></span>
         </article>
       </div>
+      <div class="swipe-dots" data-dots aria-hidden="true"></div>
     </div>
   </section>
 
@@ -483,6 +485,12 @@
 </footer>
 
 <div class="toast" role="status" aria-live="polite" data-toast></div>
+
+<!-- Phones only: a slim launch-updates bar that appears after the hero -->
+<div class="mobile-cta" data-mobile-cta>
+  <p><strong>Oqevira is coming soon</strong><span>Be first to know</span></p>
+  <a href="#updates" class="btn btn--coral">Get updates</a>
+</div>
 
 <script src="assets/js/main.js" defer></script>
 </body>

@@ -42,6 +42,20 @@ const OQ_CONFIG = {
     if (e.key === 'Escape' && doc.classList.contains('nav-open')) { setMenu(false); toggle.focus(); }
   });
   window.matchMedia('(min-width: 961px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
+  document.querySelector('[data-nav-backdrop]')?.addEventListener('click', () => setMenu(false));
+
+  /* ---------- Phones: sticky launch-updates bar after the hero ---------- */
+  const mobileCta = document.querySelector('[data-mobile-cta]');
+  if (mobileCta && 'IntersectionObserver' in window) {
+    // Hidden while the hero, the signup form, the store section or the footer is on screen.
+    const hideWhen = ['.hero', '#updates', '#download', '.site-footer'].map((s) => document.querySelector(s));
+    const onScreen = new Set();
+    const ctaIo = new IntersectionObserver((entries) => {
+      entries.forEach((en) => (en.isIntersecting ? onScreen.add(en.target) : onScreen.delete(en.target)));
+      mobileCta.classList.toggle('is-on', onScreen.size === 0);
+    });
+    hideWhen.forEach((el) => el && ctaIo.observe(el));
+  }
 
   /* ---------- Reveal on scroll ---------- */
   const revealEls = document.querySelectorAll('[data-reveal]');
@@ -126,6 +140,28 @@ const OQ_CONFIG = {
     track.addEventListener('scroll', sync, { passive: true });
     window.addEventListener('resize', sync);
     sync();
+  }
+
+  /* ---------- Card carousel dots (phones) ---------- */
+  const cardRow = document.querySelector('[data-cards]');
+  const dotsEl = document.querySelector('[data-dots]');
+  if (cardRow && dotsEl) {
+    const cards = [...cardRow.children];
+    dotsEl.innerHTML = cards.map(() => '<i></i>').join('');
+    const dots = [...dotsEl.children];
+    const syncDots = () => {
+      const rowLeft = cardRow.getBoundingClientRect().left + parseFloat(getComputedStyle(cardRow).paddingLeft);
+      let active = 0, best = Infinity;
+      cards.forEach((c, i) => {
+        const d = Math.abs(c.getBoundingClientRect().left - rowLeft);
+        if (d < best) { best = d; active = i; }
+      });
+      // At the end of the row, the last card is the active one.
+      if (cardRow.scrollLeft + cardRow.clientWidth >= cardRow.scrollWidth - 4) active = cards.length - 1;
+      dots.forEach((dot, i) => dot.classList.toggle('is-on', i === active));
+    };
+    cardRow.addEventListener('scroll', () => requestAnimationFrame(syncDots), { passive: true });
+    syncDots();
   }
 
   /* ---------- Launch signup ---------- */
