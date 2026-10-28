@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oqevira — Your next great story starts here</title>
+  <meta name="description" content="Oqevira is an upcoming travel discovery app. Discover remarkable places, unforgettable experiences, and new ways to explore the world. Coming soon to iPhone and Android.">
+  <meta name="theme-color" content="#14213D">
+
+  <!-- TODO(oqevira): replace with the final production URL and a 1200×630 share image -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Oqevira — Your next great story starts here">
+  <meta property="og:description" content="A travel discovery app for remarkable places and unforgettable experiences. Coming soon.">
+  <meta property="og:image" content="assets/img/hero-braies.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/img/hero-braies.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- ============ SVG SPRITE ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Proposed Oqevira mark: a location pin that doubles as the "Q", with a coral flight path as its tail. -->
+    <symbol id="oq-mark" viewBox="0 0 40 40">
+      <path fill="currentColor" fill-rule="evenodd" d="M19 3.5A12.5 12.5 0 0 0 6.5 16c0 8.6 12.5 20.5 12.5 20.5S31.5 24.6 31.5 16A12.5 12.5 0 0 0 19 3.5Zm0 7a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11Z"/>
+      <circle cx="19" cy="16" r="2.2" fill="#FF5A4E"/>
+      <path d="M23.8 31.2c4.6 2.1 9.3.9 12.3-3.6" fill="none" stroke="#FF5A4E" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="36.4" cy="26.1" r="1.9" fill="#FF5A4E"/>
+    </symbol>
+
+    <symbol id="i-apple" viewBox="0 0 24 24"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.220-4.857-.026-3.04 2.480-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.4C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.2.6 2.9.3.8.7 1.5 1.4 2.1.7.7 1.3 1.1 2.1 1.4.8.3 1.6.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.2-.3 2.9-.6.8-.3 1.5-.7 2.1-1.4.7-.7 1.1-1.3 1.4-2.1.3-.8.5-1.6.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.2-.6-2.9-.3-.8-.7-1.5-1.4-2.1C21.4 1.3 20.7.9 19.9.6 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0Zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9Z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.840-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.030-.01-8.050.02-12.070z"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
+
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h9M19 7h1M4 17h3M13 17h7"/><circle cx="16" cy="7" r="2.4"/><circle cx="10" cy="17" r="2.4"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 21h4"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.1a4.3 4.3 0 0 1 7.5 2.7C19.5 15.4 12 20 12 20z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M12 21s-6.5-5.8-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.2 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.6 8.4-2.1 5.1-5.1 2.1 2.1-5.1z"/></symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M7 4h10v16l-5-3.6L7 20z"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="6" r="2.2"/><path d="M8.2 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.8"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14a6.5 6.5 0 0 1 3 6"/></symbol>
+    <symbol id="i-cards" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="7" width="13" height="13" rx="2.5"/><path d="M8 4h10.5A2.5 2.5 0 0 1 21 6.5V17"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M3 8a2 2 0 0 0 0 4v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z" transform="translate(0 1)"/><path d="M14 6v2M14 11v2M14 16v1" transform="translate(0 1)"/></symbol>
+    <symbol id="i-nav" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-ur" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8.5 7H17v8.5"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.6v.01"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.5v.01"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" data-header>
+  <div class="container site-header__bar">
+    <a href="#top" class="brand" aria-label="Oqevira — back to top">
+      <svg class="brand__mark" aria-hidden="true"><use href="#oq-mark"/></svg>
+      <span class="brand__word">Oqevira</span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+        <li><a href="#discover">Discover</a></li>
+        <li><a href="#experiences">Experiences</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <a href="#updates" class="btn btn--coral site-nav__cta">Get Launch Updates</a>
+    </nav>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span class="sr-only" data-nav-label>Open menu</span>
+      <svg class="nav-toggle__open" aria-hidden="true"><use href="#i-menu"/></svg>
+      <svg class="nav-toggle__close" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero__media" aria-hidden="true">
+      <img class="hero__img" src="assets/img/hero-braies.jpg" alt="" data-parallax>
+    </div>
+    <div class="hero__shade" aria-hidden="true"></div>
+
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow eyebrow--on-dark" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>The journey begins soon</p>
+        <h1 class="hero__title" id="hero-title" data-reveal style="--d:.08s">
+          Your next great <span class="hl">story<svg class="hl__swash" viewBox="0 0 200 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 13.5C46 4.5 120 2.5 197 9.5"/></svg></span> starts here.
+        </h1>
+        <p class="hero__lead" data-reveal style="--d:.16s">Discover remarkable places, unforgettable experiences, and new ways to explore the world. Oqevira is coming soon.</p>
+
+        <div class="store-row" data-reveal style="--d:.24s">
+          <a class="store-btn" data-store="ios" aria-disabled="true" role="link" tabindex="0">
+            <svg class="store-btn__icon" aria-hidden="true"><use href="#i-apple"/></svg>
+            <span class="store-btn__text"><small>Download on the</small>App Store</span>
+            <span class="store-btn__soon" data-store-soon>Coming soon</span>
+          </a>
+          <a class="store-btn" data-store="android" aria-disabled="true" role="link" tabindex="0">
+            <svg class="store-btn__icon store-btn__icon--play" aria-hidden="true"><use href="#i-play"/></svg>
+            <span class="store-btn__text"><small>Get it on</small>Google Play</span>
+            <span class="store-btn__soon" data-store-soon>Coming soon</span>
+          </a>
+        </div>
+
+        <a href="#updates" class="text-link text-link--light" data-reveal style="--d:.32s">
+          <svg aria-hidden="true"><use href="#i-mail"/></svg>
+          Be first to know when we launch
+          <svg class="text-link__arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+
+      <div class="hero__visual" data-reveal style="--d:.2s">
+        <figure class="postcard">
+          <img src="assets/img/santorini.jpg" alt="Whitewashed cliffside village of Oia on Santorini at dusk">
+          <figcaption><svg aria-hidden="true"><use href="#i-pin"/></svg>Santorini, Greece</figcaption>
+        </figure>
+
+        <!-- Illustrative concept screen. Replace with official app screenshots when supplied. -->
+        <div class="phone phone--hero" role="img" aria-label="Concept illustration of the Oqevira explore screen, showing a search bar, category filters and featured destinations">
+          <div class="phone__screen" aria-hidden="true">
+            <div class="phone__island"></div>
+            <div class="ui-status"><span>9:41</span><span class="ui-status__icons"><i class="sig"></i><i class="wifi"></i><i class="bat"></i></span></div>
+
+            <div class="ui-pad">
+              <div class="ui-top">
+                <div>
+                  <p class="ui-muted">Hello, explorer</p>
+                  <p class="ui-h">Where to next?</p>
+                </div>
+                <span class="ui-iconbtn"><svg><use href="#i-bell"/></svg></span>
+              </div>
+
+              <div class="ui-search">
+                <svg><use href="#i-search"/></svg>
+                <span>Search places &amp; experiences</span>
+                <span class="ui-search__filter"><svg><use href="#i-sliders"/></svg></span>
+              </div>
+
+              <div class="ui-chips">
+                <span class="is-active">All</span><span>Beaches</span><span>Mountains</span><span>Culture</span><span>Food</span>
+              </div>
+
+              <div class="ui-feature" style="background-image:url('assets/img/maldives.jpg')">
+                <span class="ui-feature__heart"><svg><use href="#i-heart"/></svg></span>
+                <div class="ui-feature__body">
+                  <span class="ui-tag">Island escapes</span>
+                  <p class="ui-feature__title">The Maldives</p>
+                  <p class="ui-feature__sub"><svg><use href="#i-pin"/></svg>Indian Ocean</p>
+                </div>
+              </div>
+
+              <div class="ui-rowhead"><span>Experiences</span><span class="ui-link">See all</span></div>
+              <div class="ui-minis">
+                <div class="ui-mini"><span class="ui-mini__img" style="background-image:url('assets/img/cappadocia.jpg')"></span><p>Balloon flights</p><small>Cappadocia</small></div>
+                <div class="ui-mini"><span class="ui-mini__img" style="background-image:url('assets/img/bali-temple.jpg')"></span><p>Temple trails</p><small>Bali</small></div>
+              </div>
+            </div>
+
+            <div class="ui-tabbar">
+              <span class="is-active"><svg><use href="#i-compass"/></svg>Explore</span>
+              <span><svg><use href="#i-bookmark"/></svg></span>
+              <span><svg><use href="#i-route"/></svg></span>
+              <span><svg><use href="#i-user"/></svg></span>
+            </div>
+          </div>
+        </div>
+        <p class="concept-note concept-note--light">Concept preview · not final app screens</p>
+      </div>
+    </div>
+
+    <div class="container hero__foot">
+      <a href="#discover" class="scroll-cue"><svg aria-hidden="true"><use href="#i-arrow-down"/></svg>Scroll to explore</a>
+      <span class="hero__credit"><svg aria-hidden="true"><use href="#i-pin"/></svg>Lago di Braies, Italy</span>
+    </div>
+  </section>
+
+  <!-- ============ APP SHOWCASE ============ -->
+  <section class="section showcase" id="discover" aria-labelledby="showcase-title">
+    <div class="container showcase__grid">
+      <div class="showcase__copy">
+        <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>The Oqevira app</p>
+        <h2 class="h2" id="showcase-title" data-reveal style="--d:.06s">A world of discovery, in your hands.</h2>
+        <p class="lead" data-reveal style="--d:.12s">Find inspiration for your next adventure and discover experiences worth travelling for.</p>
+
+        <ul class="feature-list">
+          <li data-reveal style="--d:.16s">
+            <span class="feature-list__icon"><svg aria-hidden="true"><use href="#i-search"/></svg></span>
+            <div><h3>Simple, focused search</h3><p>Look up a place, a mood or an activity and get straight to the ideas that fit.</p></div>
+          </li>
+          <li data-reveal style="--d:.22s">
+            <span class="feature-list__icon"><svg aria-hidden="true"><use href="#i-cards"/></svg></span>
+            <div><h3>Explore and discovery cards</h3><p>Browse destinations through photography first, so inspiration does the work.</p></div>
+          </li>
+          <li data-reveal style="--d:.28s">
+            <span class="feature-list__icon"><svg aria-hidden="true"><use href="#i-ticket"/></svg></span>
+            <div><h3>Attractions and activities</h3><p>See what there is to do in one place, from landmark sights to small local finds.</p></div>
+          </li>
+          <li data-reveal style="--d:.34s">
+            <span class="feature-list__icon"><svg aria-hidden="true"><use href="#i-nav"/></svg></span>
+            <div><h3>Clean, intuitive navigation</h3><p>A calm interface that stays out of the way while you plan.</p></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="showcase__visual">
+        <svg class="flight-path" viewBox="0 0 520 520" aria-hidden="true">
+          <path d="M40 430C120 250 300 470 360 300S470 110 500 60"/>
+          <circle cx="500" cy="60" r="6"/>
+        </svg>
+        <div class="showcase__halo" aria-hidden="true"></div>
+
+        <!-- Illustrative concept screen. Replace with official app screenshots when supplied. -->
+        <div class="phone phone--a" data-reveal style="--d:.1s" role="img" aria-label="Concept illustration of an experiences list in the Oqevira app">
+          <div class="phone__screen" aria-hidden="true">
+            <div class="phone__island"></div>
+            <div class="ui-status"><span>9:41</span><span class="ui-status__icons"><i class="sig"></i><i class="wifi"></i><i class="bat"></i></span></div>
+            <div class="ui-pad">
+              <div class="ui-top">
+                <div>
+                  <p class="ui-h">Experiences</p>
+                  <p class="ui-muted">Worth travelling for</p>
+                </div>
+                <span class="ui-iconbtn"><svg><use href="#i-search"/></svg></span>
+              </div>
+              <div class="ui-seg"><span class="is-active">For you</span><span>Nearby</span><span>Saved</span></div>
+
+              <ul class="ui-list">
+                <li><span class="ui-list__img" style="background-image:url('assets/img/cappadocia.jpg')"></span><div><small>Adventure</small><p>Sunrise balloon flight</p><span class="ui-loc"><svg><use href="#i-pin"/></svg>Cappadocia, Türkiye</span></div><svg class="ui-list__heart is-on"><use href="#i-heart"/></svg></li>
+                <li><span class="ui-list__img" style="background-image:url('assets/img/tokyo-alley.jpg')"></span><div><small>Food &amp; nightlife</small><p>Lantern-lit alley eats</p><span class="ui-loc"><svg><use href="#i-pin"/></svg>Tokyo, Japan</span></div><svg class="ui-list__heart"><use href="#i-heart"/></svg></li>
+                <li><span class="ui-list__img" style="background-image:url('assets/img/venice.jpg')"></span><div><small>Culture</small><p>Canals at golden hour</p><span class="ui-loc"><svg><use href="#i-pin"/></svg>Venice, Italy</span></div><svg class="ui-list__heart"><use href="#i-heart"/></svg></li>
+                <li><span class="ui-list__img" style="background-image:url('assets/img/bali-temple.jpg')"></span><div><small>Sacred places</small><p>Lakeside temple visit</p><span class="ui-loc"><svg><use href="#i-pin"/></svg>Bali, Indonesia</span></div><svg class="ui-list__heart"><use href="#i-heart"/></svg></li>
+                <li><span class="ui-list__img" style="background-image:url('assets/img/giza.jpg')"></span><div><small>Landmarks</small><p>Pyramids at first light</p><span class="ui-loc"><svg><use href="#i-pin"/></svg>Giza, Egypt</span></div><svg class="ui-list__heart is-on"><use href="#i-heart"/></svg></li>
+              </ul>
+            </div>
+            <div class="ui-tabbar">
+              <span><svg><use href="#i-compass"/></svg></span>
+              <span class="is-active"><svg><use href="#i-ticket"/></svg>Experiences</span>
+              <span><svg><use href="#i-bookmark"/></svg></span>
+              <span><svg><use href="#i-user"/></svg></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone phone--b" data-reveal style="--d:.22s" role="img" aria-label="Concept illustration of a destination page for Ha Long Bay in the Oqevira app">
+          <div class="phone__screen" aria-hidden="true">
+            <div class="phone__island"></div>
+            <div class="ui-hero" style="background-image:url('assets/img/halong.jpg')">
+              <div class="ui-status ui-status--light"><span>9:41</span><span class="ui-status__icons"><i class="sig"></i><i class="wifi"></i><i class="bat"></i></span></div>
+              <div class="ui-hero__btns"><span class="ui-glass"><svg><use href="#i-chev-l"/></svg></span><span class="ui-glass"><svg><use href="#i-heart"/></svg></span></div>
+              <div class="ui-hero__dots"><i class="is-on"></i><i></i><i></i></div>
+            </div>
+            <div class="ui-sheet">
+              <p class="ui-h">Ha Long Bay</p>
+              <p class="ui-loc ui-loc--lg"><svg><use href="#i-pin"/></svg>Quảng Ninh, Vietnam</p>
+              <div class="ui-tags"><span>Bays</span><span>Kayaking</span><span>Caves</span></div>
+              <p class="ui-rowhead"><span>Things to do</span><span class="ui-link">See all</span></p>
+              <div class="ui-thumbs">
+                <span style="background-image:url('assets/img/halong.jpg');--pos:80% 60%"></span>
+                <span style="background-image:url('assets/img/old-town.jpg')"></span>
+                <span style="background-image:url('assets/img/travellers.jpg')"></span>
+              </div>
+              <div class="ui-guide">
+                <span class="ui-guide__avatar"><svg><use href="#i-users"/></svg></span>
+                <div><p>Local guides</p><small>Discover the bay with local knowledge</small></div>
+                <svg class="ui-guide__chev"><use href="#i-chev-r"/></svg>
+              </div>
+              <span class="ui-cta">Plan a visit</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="concept-note showcase__note">Illustrative concept screens — the final app may differ.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DISCOVER WHAT'S POSSIBLE ============ -->
+  <section class="section possible" id="experiences" aria-labelledby="possible-title">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>Discover what's possible</p>
+          <h2 class="h2" id="possible-title" data-reveal style="--d:.06s">Every journey, from first spark to final plan.</h2>
+        </div>
+        <p class="lead section-head__aside" data-reveal style="--d:.12s">Oqevira is being designed around the moments that make travel memorable: the place, the people and the things you'll still talk about years later.</p>
+      </div>
+
+      <div class="cards" data-cards>
+        <article class="card" data-reveal style="--d:.05s">
+          <img class="card__img" src="assets/img/halong.jpg" alt="Limestone islands rising from the emerald water of Ha Long Bay" loading="lazy">
+          <div class="card__body">
+            <span class="card__num">01</span>
+            <h3 class="card__title">Discover Destinations</h3>
+            <p class="card__text">Explore inspiring places and find ideas for your next journey.</p>
+          </div>
+          <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow-ur"/></svg></span>
+        </article>
+        <article class="card" data-reveal style="--d:.12s">
+          <img class="card__img" src="assets/img/tokyo-alley.jpg" alt="Narrow evening alley lined with glowing lanterns and small eateries in Japan" loading="lazy">
+          <div class="card__body">
+            <span class="card__num">02</span>
+            <h3 class="card__title">Explore Experiences</h3>
+            <p class="card__text">Discover activities, attractions, cultural experiences, and events.</p>
+          </div>
+          <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow-ur"/></svg></span>
+        </article>
+        <article class="card" data-reveal style="--d:.19s">
+          <img class="card__img" src="assets/img/travellers.jpg" alt="Group of friends laughing together on a mountain trail" loading="lazy">
+          <div class="card__body">
+            <span class="card__num">03</span>
+            <h3 class="card__title">Connect With Local Guides</h3>
+            <p class="card__text">Find opportunities to discover destinations through local knowledge and guidance.</p>
+          </div>
+          <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow-ur"/></svg></span>
+        </article>
+        <article class="card" data-reveal style="--d:.26s">
+          <img class="card__img" src="assets/img/map-flatlay.jpg" alt="Paper map laid out with a camera, notebook and travel brochures" loading="lazy">
+          <div class="card__body">
+            <span class="card__num">04</span>
+            <h3 class="card__title">Plan Your Next Escape</h3>
+            <p class="card__text">Explore travel possibilities and prepare for memorable adventures.</p>
+          </div>
+          <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow-ur"/></svg></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DESTINATION RIBBON ============ -->
+  <section class="ribbon" aria-labelledby="ribbon-title">
+    <div class="container ribbon__head">
+      <h2 class="h3" id="ribbon-title" data-reveal>Where will your story begin?</h2>
+      <div class="ribbon__ctrls">
+        <button type="button" class="round-btn" data-ribbon-prev aria-label="Scroll destinations left"><svg aria-hidden="true"><use href="#i-chev-l"/></svg></button>
+        <button type="button" class="round-btn" data-ribbon-next aria-label="Scroll destinations right"><svg aria-hidden="true"><use href="#i-chev-r"/></svg></button>
+      </div>
+    </div>
+    <ul class="ribbon__track" data-ribbon tabindex="0" aria-label="Destination inspiration">
+      <li class="dest"><img src="assets/img/venice.jpg" alt="Gondola passing the Rialto Bridge in Venice" loading="lazy"><p><strong>Venice</strong><span>Italy</span></p></li>
+      <li class="dest"><img src="assets/img/giza.jpg" alt="The pyramids of Giza rising from the desert" loading="lazy"><p><strong>Giza</strong><span>Egypt</span></p></li>
+      <li class="dest"><img src="assets/img/cappadocia.jpg" alt="Hot-air balloons drifting over Cappadocia's valleys" loading="lazy"><p><strong>Cappadocia</strong><span>Türkiye</span></p></li>
+      <li class="dest"><img src="assets/img/paris.jpg" alt="The Eiffel Tower and the Seine at dusk" loading="lazy"><p><strong>Paris</strong><span>France</span></p></li>
+      <li class="dest"><img src="assets/img/safari.jpg" alt="Safari vehicle on the savannah at sunset" loading="lazy"><p><strong>The savannah</strong><span>Safari country</span></p></li>
+      <li class="dest"><img src="assets/img/bali-temple.jpg" alt="Lakeside temple with a tiered roof in Bali" loading="lazy"><p><strong>Bali</strong><span>Indonesia</span></p></li>
+      <li class="dest"><img src="assets/img/old-town.jpg" alt="Traveller with a backpack walking a cobbled old-town lane" loading="lazy"><p><strong>Old-town lanes</strong><span>Wander slowly</span></p></li>
+    </ul>
+  </section>
+
+  <!-- ============ LAUNCH + SIGNUP ============ -->
+  <section class="launch" id="about" aria-labelledby="launch-title">
+    <div class="launch__bg" aria-hidden="true">
+      <img src="assets/img/above-clouds.jpg" alt="" loading="lazy">
+      <span class="launch__sun"></span>
+    </div>
+    <div class="container launch__inner">
+      <p class="eyebrow eyebrow--on-dark eyebrow--center" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>Coming soon</p>
+      <h2 class="h2 launch__title" id="launch-title" data-reveal style="--d:.06s">Something extraordinary is on the horizon.</h2>
+      <p class="lead launch__lead" data-reveal style="--d:.12s">The way you discover your next adventure is about to get more exciting. Join us as Oqevira prepares to launch.</p>
+
+      <div class="signup" id="updates" data-reveal style="--d:.18s">
+        <form class="signup__form" novalidate data-signup>
+          <label for="signup-email" class="signup__label">Get launch updates</label>
+          <div class="signup__row">
+            <div class="signup__field">
+              <svg aria-hidden="true"><use href="#i-mail"/></svg>
+              <input id="signup-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" aria-describedby="signup-msg signup-privacy" required>
+            </div>
+            <button type="submit" class="btn btn--coral btn--lg signup__btn">
+              <span class="signup__btn-text">Notify Me at Launch</span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+          <p class="signup__msg" id="signup-msg" role="status" aria-live="polite"></p>
+          <!-- TODO(oqevira): privacy wording to be approved by the Oqevira team; link to the final privacy policy. -->
+          <p class="signup__privacy" id="signup-privacy">We'll only use your email to send Oqevira launch news, and you can unsubscribe at any time. See our <a href="#" data-placeholder="Privacy Policy URL">Privacy Policy</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APP STORES ============ -->
+  <section class="section download" id="download" aria-labelledby="download-title">
+    <div class="container">
+      <div class="download__panel">
+        <div class="download__copy">
+          <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>iPhone &amp; Android</p>
+          <h2 class="h2" id="download-title" data-reveal style="--d:.06s">Take Oqevira wherever the road leads.</h2>
+          <p class="lead" data-reveal style="--d:.12s">Oqevira is being built for iPhone and Android. Download links will appear here as soon as the apps are published.</p>
+          <div class="store-row store-row--dark" data-reveal style="--d:.18s">
+            <!-- TODO(oqevira): add the real App Store URL in assets/js/main.js (OQ_CONFIG.appStoreUrl) -->
+            <a class="store-btn" data-store="ios" aria-disabled="true" role="link" tabindex="0">
+              <svg class="store-btn__icon" aria-hidden="true"><use href="#i-apple"/></svg>
+              <span class="store-btn__text"><small>Download on the</small>App Store</span>
+              <span class="store-btn__soon" data-store-soon>Coming soon</span>
+            </a>
+            <!-- TODO(oqevira): add the real Google Play URL in assets/js/main.js (OQ_CONFIG.googlePlayUrl) -->
+            <a class="store-btn" data-store="android" aria-disabled="true" role="link" tabindex="0">
+              <svg class="store-btn__icon store-btn__icon--play" aria-hidden="true"><use href="#i-play"/></svg>
+              <span class="store-btn__text"><small>Get it on</small>Google Play</span>
+              <span class="store-btn__soon" data-store-soon>Coming soon</span>
+            </a>
+          </div>
+          <p class="download__fine" data-reveal style="--d:.22s"><svg aria-hidden="true"><use href="#i-info"/></svg><span>Not yet available to install. <a href="#updates">Get notified</a> when it is.</span></p>
+        </div>
+        <div class="download__visual" data-reveal style="--d:.1s">
+          <img src="assets/img/beach-palm.jpg" alt="Palm tree on a white-sand beach beside turquoise water" loading="lazy">
+          <div class="download__badge">
+            <svg class="brand__mark" aria-hidden="true"><use href="#oq-mark"/></svg>
+            <div><strong>Launching soon</strong><span>iOS &amp; Android</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <a href="#top" class="brand brand--light" aria-label="Oqevira — back to top">
+          <svg class="brand__mark" aria-hidden="true"><use href="#oq-mark"/></svg>
+          <span class="brand__word">Oqevira</span>
+        </a>
+        <p>A travel discovery app in the making, for people who travel to collect stories.</p>
+        <!-- TODO(oqevira): replace each href with the approved social account URL, or remove the icon. -->
+        <ul class="socials" aria-label="Oqevira on social media">
+          <li><a href="#" data-placeholder="Instagram URL" aria-label="Instagram (coming soon)"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
+          <li><a href="#" data-placeholder="TikTok URL" aria-label="TikTok (coming soon)"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></a></li>
+          <li><a href="#" data-placeholder="X URL" aria-label="X (coming soon)"><svg aria-hidden="true"><use href="#i-x"/></svg></a></li>
+          <li><a href="#" data-placeholder="Facebook URL" aria-label="Facebook (coming soon)"><svg aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
+        </ul>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Footer">
+        <div>
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="#discover">Discover</a></li>
+            <li><a href="#experiences">Experiences</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#updates">Launch updates</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Company</h2>
+          <ul>
+            <!-- TODO(oqevira): contact email / page and legal URLs -->
+            <li><a href="#" data-placeholder="Contact email or page">Contact</a></li>
+            <li><a href="#" data-placeholder="Privacy Policy URL">Privacy Policy</a></li>
+            <li><a href="#" data-placeholder="Terms of Service URL">Terms of Service</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+      <!-- TODO(oqevira): confirm the legal entity name for the copyright line -->
+      <p>© <span data-year>2026</span> Oqevira. All rights reserved.</p>
+      <p>Photography via <a href="https://unsplash.com" rel="noopener" target="_blank">Unsplash</a></p>
+      <a href="#top" class="to-top">Back to top <svg aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" role="status" aria-live="polite" data-toast></div>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
