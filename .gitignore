@@ -4,3 +4,9 @@ Thumbs.db
 *.log
 
 .vercel
+
+# Private: server config, admin login, uploaded images
+backend/config.php
+deploy/
+uploads/*
+!uploads/.htaccess

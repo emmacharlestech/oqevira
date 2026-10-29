@@ -11,12 +11,15 @@
  *     oqevira.com or localhost post to their own copy; other hosts (the Vercel mirror)
  *     post to oqevira.com.
  */
+const OQ_SITE = /(^|\.)oqevira\.com$|^localhost$|^127\.0\.0\.1$/.test(location.hostname)
+  ? new URL('.', location.href).href
+  : 'https://oqevira.com/';
 const OQ_CONFIG = {
   appStoreUrl: '',
   googlePlayUrl: '',
-  signupEndpoint: /(^|\.)oqevira\.com$|^localhost$|^127\.0\.0\.1$/.test(location.hostname)
-    ? 'waitlist.php'
-    : 'https://oqevira.com/waitlist.php'
+  signupEndpoint: OQ_SITE + 'waitlist.php',
+  // Updates and gallery photos managed in /admin
+  contentEndpoint: OQ_SITE + 'api/content.php'
 };
 
 (() => {
@@ -284,7 +287,9 @@ const OQ_CONFIG = {
           return;
         }
         const first = form.elements.name.value.trim().split(/\s+/)[0];
-        done.querySelector('[data-done-title]').textContent = `You're on the list, ${first}!`;
+        done.querySelector('[data-done-title]').textContent = data.already
+          ? `You're already on the list, ${first}!`
+          : `You're on the list, ${first}!`;
         form.reset();
         syncRole();
         form.hidden = true;
@@ -298,6 +303,70 @@ const OQ_CONFIG = {
       }
     });
   }
+
+  /* ---------- Admin-managed content: latest updates + destination gallery ---------- */
+  const imgUrl = (path) => new URL(path, OQ_SITE).href;
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  // Plain text → paragraphs with clickable https links (text is escaped first).
+  const richText = (text) => text.trim().split(/\n{2,}/).map((p) =>
+    `<p>${esc(p).replace(/\n/g, '<br>').replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>')}</p>`).join('');
+
+  const renderNews = (updates) => {
+    const section = document.querySelector('[data-news]');
+    const list = document.querySelector('[data-news-list]');
+    const reader = document.querySelector('[data-reader]');
+    if (!section || !updates.length) return;
+
+    list.innerHTML = updates.map((u, i) => `
+      <li class="post">
+        <button type="button" class="post__btn" data-post="${i}">
+          ${u.image ? `<span class="post__img"><img src="${esc(imgUrl(u.image))}" alt="" loading="lazy"></span>` : ''}
+          <span class="post__body">
+            <span class="post__date">${esc(u.date)}</span>
+            <span class="post__title">${esc(u.title)}</span>
+            <span class="post__text">${esc(u.body.length > 160 ? u.body.slice(0, 160).trim() + '…' : u.body)}</span>
+            <span class="post__more">Read more <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          </span>
+        </button>
+      </li>`).join('');
+    section.hidden = false;
+    document.querySelector('[data-news-link]')?.removeAttribute('hidden');
+
+    list.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-post]');
+      if (!btn || !reader) return;
+      const u = updates[+btn.dataset.post];
+      const img = reader.querySelector('[data-reader-img]');
+      img.hidden = !u.image;
+      if (u.image) img.src = imgUrl(u.image);
+      reader.querySelector('[data-reader-date]').textContent = u.date;
+      reader.querySelector('[data-reader-title]').textContent = u.title;
+      reader.querySelector('[data-reader-text]').innerHTML = richText(u.body);
+      reader.showModal();
+      doc.classList.add('reader-open');
+    });
+    reader?.addEventListener('close', () => doc.classList.remove('reader-open'));
+    reader?.querySelector('[data-reader-close]').addEventListener('click', () => reader.close());
+    // A click on the dimmed backdrop (outside the panel) closes it
+    reader?.addEventListener('click', (e) => { if (e.target === reader) reader.close(); });
+  };
+
+  const renderGallery = (items) => {
+    if (!track || !items.length) return;
+    track.innerHTML = items.map((g) => `
+      <li class="dest"><img src="${esc(imgUrl(g.image))}" alt="${esc(g.alt || g.title)}" loading="lazy"><p><strong>${esc(g.title)}</strong>${g.subtitle ? `<span>${esc(g.subtitle)}</span>` : ''}</p></li>`).join('');
+    track.scrollLeft = 0;
+    track.dispatchEvent(new Event('scroll'));
+  };
+
+  fetch(OQ_CONFIG.contentEndpoint, { headers: { Accept: 'application/json' } })
+    .then((res) => (res.ok ? res.json() : null))
+    .then((data) => {
+      if (!data?.ok) return;
+      renderNews(data.updates || []);
+      renderGallery(data.gallery || []);
+    })
+    .catch(() => { /* keep the built-in destinations if the content service is unreachable */ });
 
   /* ---------- Footer year ---------- */
   const year = document.querySelector('[data-year]');

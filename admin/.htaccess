@@ -1,0 +1,18 @@
+# Admin area: no directory listings, open the dashboard by default
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Live site: admin always over HTTPS
+  RewriteCond %{HTTP_HOST} ^(www\.)?oqevira\.com$ [NC]
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://oqevira.com%{REQUEST_URI} [L,R=301]
+
+  # Clean address: /admin/signups serves signups.php
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^([a-z-]+)$ $1.php [L]
+</IfModule>

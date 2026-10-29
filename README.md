@@ -36,10 +36,33 @@ The form in the "Coming soon" section asks for name, email, phone, city and coun
 
 `waitlist.php` checks every field again on the server, then:
 
-1. appends the sign-up to `~/oqevira_waitlist/waitlist.csv` on the host, next to `public_html` so it is never web-accessible (download it over SFTP and open it in Excel or Google Sheets);
-2. emails it to **support@oqevira.com**, with Reply-To set to the person's address.
+1. saves the sign-up in the SQLite database at `~/oqevira_data/oqevira.sqlite` on the host (next to `public_html`, never web-accessible);
+2. emails it to the alert address in Admin → Settings (support@oqevira.com), with Reply-To set to the person's address;
+3. sends the person a branded welcome email (wording editable in Admin → Settings).
 
-Spam protection: a hidden honeypot field, a minimum fill time, a limit of 5 sign-ups per IP address per hour, and only oqevira.com and the Vercel copy may post to it.
+Spam protection: a hidden honeypot field, a minimum fill time, a limit of 5 sign-ups per IP address per hour, and only oqevira.com and the Vercel copy may post to it. An email that is already on the list is not added twice.
+
+## Admin (https://oqevira.com/admin/)
+
+| Page | What it does |
+| --- | --- |
+| Dashboard | Waitlist totals, who is signing up, the most wanted features, latest sign-ups |
+| Waitlist | Search and filter sign-ups, email / WhatsApp / call them, mark as contacted, resend the welcome email, delete, download as CSV |
+| Updates | Post news with a photo; published posts appear in “Latest from Oqevira” on the home page |
+| Gallery | Upload, reorder, hide and delete the photos in “Where will your story begin?” |
+| Settings | Alert address and the welcome email text, with a test send |
+| Account | Your name and password |
+
+```
+backend/   shared PHP (config, database, auth, mail, image uploads) — blocked from the web
+admin/     the admin pages
+api/       content.php: published updates + gallery as JSON for the home page
+uploads/   images uploaded in the admin (resized, saved as WebP; scripts blocked)
+```
+
+`backend/config.php` (not in git) holds the app secret and the first admin account; copy `backend/config.example.php` to create it. The database and the first admin are created automatically on the first request.
+
+When you change `assets/css/styles.css` or `assets/js/main.js`, bump the `?v=` on their links in `index.html`: the host tells browsers to cache them for a week.
 
 ## Placeholders the Oqevira team needs to supply
 

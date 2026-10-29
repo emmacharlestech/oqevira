@@ -26,7 +26,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/img/hero-braies.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- Bump ?v= on every release: the host lets browsers cache CSS/JS for a week -->
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261029b">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -93,6 +94,7 @@
         <li><a href="#discover">Discover</a></li>
         <li><a href="#experiences">Experiences</a></li>
         <li><a href="#about">About</a></li>
+        <li data-news-link hidden><a href="#news">News</a></li>
       </ul>
       <a href="#updates" class="btn btn--coral site-nav__cta">Join the Waitlist</a>
     </nav>
@@ -435,6 +437,32 @@
     </ul>
   </section>
 
+  <!-- ============ LATEST UPDATES (filled from Admin → Updates; hidden until one is posted) ============ -->
+  <section class="section news" id="news" aria-labelledby="news-title" data-news hidden>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow"><span class="eyebrow__line" aria-hidden="true"></span>Latest from Oqevira</p>
+          <h2 class="h2" id="news-title">News from the journey so far.</h2>
+        </div>
+        <p class="lead section-head__aside">Behind-the-scenes progress, launch news and early access announcements, straight from the team.</p>
+      </div>
+      <ul class="news__list" data-news-list></ul>
+    </div>
+  </section>
+
+  <dialog class="reader" data-reader aria-labelledby="reader-title">
+    <div class="reader__inner">
+      <button type="button" class="reader__close" data-reader-close aria-label="Close"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+      <img class="reader__img" alt="" data-reader-img hidden>
+      <div class="reader__body">
+        <p class="reader__date" data-reader-date></p>
+        <h2 class="reader__title" id="reader-title" data-reader-title></h2>
+        <div class="reader__text" data-reader-text></div>
+      </div>
+    </div>
+  </dialog>
+
   <!-- ============ LAUNCH + SIGNUP ============ -->
   <section class="launch" id="about" aria-labelledby="launch-title">
     <div class="launch__bg" aria-hidden="true">
@@ -696,6 +724,6 @@
   <a href="#updates" class="btn btn--coral">Join waitlist</a>
 </div>
 
-<script src="assets/js/main.js" defer></script>
+<script src="assets/js/main.js?v=20261029b" defer></script>
 </body>
 </html>
