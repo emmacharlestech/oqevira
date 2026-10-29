@@ -10,7 +10,9 @@ assets/img/            travel photography (Unsplash licence)
 assets/brand/          official logo, icon, favicon and iOS touch icon (from the brand kit)
 ```
 
-To preview it, open `index.html` directly or serve the folder from any web server. For example, with XAMPP it runs at `http://localhost/oqevira/`.
+Live at **https://oqevira.com** (Namecheap hosting; upload `index.html` and `assets/` into `public_html` over SFTP, port 21098). A copy is also on Vercel at https://oqevira.vercel.app.
+
+To preview it locally, open `index.html` directly or serve the folder from any web server. For example, with XAMPP it runs at `http://localhost/oqevira/`.
 
 ## Launch configuration
 
@@ -42,7 +44,6 @@ Each one is marked `TODO(oqevira)` or `data-placeholder` in `index.html`.
 | Contact email or page | footer |
 | Social accounts (Instagram, TikTok, X, Facebook), or remove the unused ones | footer `.socials` |
 | Legal entity name for the copyright line | footer |
-| Production URL and a 1200×630 share image | `<head>` Open Graph tags |
 | Official app screenshots to replace the **illustrative** phone screens | hero and "A world of discovery" section |
 
 Copy follows the brief. It doesn't claim a launch date, user numbers, partnerships, reviews or any other availability.
