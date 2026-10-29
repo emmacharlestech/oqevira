@@ -6,14 +6,17 @@
  * Launch configuration — the only place these need to change.
  *   appStoreUrl / googlePlayUrl: paste the real store listing URLs once published.
  *     While empty, both store buttons stay labelled "Coming soon" and do not link anywhere.
- *   signupEndpoint: URL of the approved email service / backend that accepts
- *     POST { email } as JSON. While empty, the form validates input but saves nothing
- *     and tells the visitor so.
+ *   signupEndpoint: the waitlist handler (waitlist.php on the oqevira.com host), which
+ *     saves each sign-up and emails it to support@oqevira.com. Pages served from
+ *     oqevira.com or localhost post to their own copy; other hosts (the Vercel mirror)
+ *     post to oqevira.com.
  */
 const OQ_CONFIG = {
   appStoreUrl: '',
   googlePlayUrl: '',
-  signupEndpoint: ''
+  signupEndpoint: /(^|\.)oqevira\.com$|^localhost$|^127\.0\.0\.1$/.test(location.hostname)
+    ? 'waitlist.php'
+    : 'https://oqevira.com/waitlist.php'
 };
 
 (() => {
@@ -47,8 +50,8 @@ const OQ_CONFIG = {
   /* ---------- Phones: sticky launch-updates bar after the hero ---------- */
   const mobileCta = document.querySelector('[data-mobile-cta]');
   if (mobileCta && 'IntersectionObserver' in window) {
-    // Hidden while the hero, the signup form, the store section or the footer is on screen.
-    const hideWhen = ['.hero', '#updates', '#download', '.site-footer'].map((s) => document.querySelector(s));
+    // Hidden while the hero, a waitlist button or form, the store section or the footer is on screen.
+    const hideWhen = ['.hero', '.seven__cta', '#updates', '#download', '.site-footer'].map((s) => document.querySelector(s));
     const onScreen = new Set();
     const ctaIo = new IntersectionObserver((entries) => {
       entries.forEach((en) => (en.isIntersecting ? onScreen.add(en.target) : onScreen.delete(en.target)));
@@ -164,45 +167,102 @@ const OQ_CONFIG = {
     syncDots();
   }
 
-  /* ---------- Launch signup ---------- */
-  const form = document.querySelector('[data-signup]');
+  /* ---------- Waitlist ---------- */
+  const form = document.querySelector('[data-waitlist]');
   if (form) {
-    const input = form.querySelector('input[type="email"]');
     const msg = form.querySelector('#signup-msg');
     const btn = form.querySelector('button[type="submit"]');
+    const done = document.querySelector('[data-waitlist-done]');
+    const extras = form.querySelectorAll('[data-role-extra]');
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const icons = { error: 'i-alert', success: 'i-check', info: 'i-info' };
+
+    form.querySelector('[data-started]').value = String(Date.now());
 
     const show = (type, text) => {
       msg.className = `signup__msg is-${type}`;
       msg.innerHTML = `<svg aria-hidden="true"><use href="#${icons[type]}"/></svg><span></span>`;
       msg.querySelector('span').textContent = text;
     };
-    const clear = () => { msg.className = 'signup__msg'; msg.textContent = ''; input.removeAttribute('aria-invalid'); };
+    const clearMsg = () => { msg.className = 'signup__msg'; msg.textContent = ''; };
 
-    input.addEventListener('input', () => { if (input.getAttribute('aria-invalid')) clear(); });
+    // Each rule returns an error message, or '' when the field is fine.
+    const rules = {
+      name: (v) => (v.length < 2 ? 'Please enter your full name.' : ''),
+      email: (v) => (!v ? 'Please enter your email address.' : !EMAIL_RE.test(v) ? 'That email doesn’t look quite right.' : ''),
+      phone: (v) => {
+        const digits = v.replace(/\D/g, '').length;
+        if (!v) return 'Please enter your phone number.';
+        return /^[0-9+()\-.\s]+$/.test(v) && digits >= 7 && digits <= 15 ? '' : 'Please enter a valid phone number, including the country code.';
+      },
+      location: (v) => (v.length < 2 ? 'Please tell us your city and country.' : ''),
+      guide_area: (v) => (v.length < 2 ? 'Please tell us where you guide.' : ''),
+      business_name: (v) => (v.length < 2 ? 'Please enter your business name.' : ''),
+      business_type: (v) => (!v ? 'Please choose your type of business.' : '')
+    };
+    const errorFor = (name) => {
+      if (name === 'role') return form.elements.role.value ? '' : 'Please choose how you’ll use Oqevira.';
+      if (name === 'consent') return form.elements.consent.checked ? '' : 'Please tick this box so we can contact you about your place on the waitlist.';
+      const el = form.elements[name];
+      return rules[name] ? rules[name](el.value.trim()) : '';
+    };
+    const errEl = (name) => ({
+      name: 'wl-name-err', email: 'wl-email-err', phone: 'wl-phone-err', location: 'wl-location-err',
+      role: 'wl-role-err', consent: 'wl-consent-err', guide_area: 'wl-guide-area-err',
+      business_name: 'wl-biz-name-err', business_type: 'wl-biz-type-err'
+    })[name];
+    const setError = (name, text) => {
+      const out = document.getElementById(errEl(name));
+      if (out) out.textContent = text;
+      const el = form.elements[name];
+      if (el && !(el instanceof RadioNodeList)) el.toggleAttribute('aria-invalid', Boolean(text));
+      if (name === 'role') form.querySelectorAll('input[name="role"]').forEach((r) => r.toggleAttribute('aria-invalid', Boolean(text)));
+    };
+
+    // Fields that must be filled: the core ones plus whatever the chosen role reveals.
+    const requiredNames = () => {
+      const names = ['name', 'email', 'phone', 'location', 'role'];
+      extras.forEach((box) => {
+        if (!box.hidden) box.querySelectorAll('[data-required-when-shown]').forEach((el) => names.push(el.name));
+      });
+      return [...names, 'consent'];
+    };
+
+    const syncRole = () => {
+      extras.forEach((box) => {
+        const on = box.dataset.roleExtra === form.elements.role.value;
+        box.hidden = !on;
+        box.querySelectorAll('[data-required-when-shown]').forEach((el) => {
+          el.required = on;
+          if (!on) setError(el.name, '');
+        });
+      });
+    };
+    form.querySelectorAll('input[name="role"]').forEach((r) => r.addEventListener('change', () => { syncRole(); setError('role', ''); }));
+
+    // Once a field has shown an error, re-check it as the visitor fixes it.
+    form.addEventListener('input', (e) => {
+      const name = e.target.name;
+      if (errEl(name) && document.getElementById(errEl(name))?.textContent) setError(name, errorFor(name));
+    });
+    form.addEventListener('change', (e) => {
+      if (e.target.name === 'consent') setError('consent', errorFor('consent'));
+    });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = input.value.trim();
+      clearMsg();
 
-      if (!email) {
-        input.setAttribute('aria-invalid', 'true');
-        show('error', 'Please enter your email address.');
-        input.focus();
-        return;
-      }
-      if (!EMAIL_RE.test(email)) {
-        input.setAttribute('aria-invalid', 'true');
-        show('error', 'That email doesn’t look quite right. Please check it and try again.');
-        input.focus();
-        return;
-      }
-      input.removeAttribute('aria-invalid');
-
-      // No approved email service is connected yet: be honest, save nothing.
-      if (!OQ_CONFIG.signupEndpoint) {
-        show('info', 'Launch updates aren’t open just yet, so we haven’t saved your email. Please check back soon.');
+      let firstBad = null;
+      requiredNames().forEach((name) => {
+        const text = errorFor(name);
+        setError(name, text);
+        if (text && !firstBad) firstBad = name;
+      });
+      if (firstBad) {
+        show('error', 'Please check the highlighted fields and try again.');
+        const el = firstBad === 'role' ? form.querySelector('input[name="role"]') : form.elements[firstBad];
+        el.focus();
         return;
       }
 
@@ -211,14 +271,27 @@ const OQ_CONFIG = {
       try {
         const res = await fetch(OQ_CONFIG.signupEndpoint, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ email })
+          headers: { Accept: 'application/json' },
+          body: new FormData(form)
         });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          if (data.field && errEl(data.field)) {
+            setError(data.field, data.error);
+            form.elements[data.field]?.focus?.();
+          }
+          show('error', data.error || 'Something went wrong on our side. Please try again in a moment.');
+          return;
+        }
+        const first = form.elements.name.value.trim().split(/\s+/)[0];
+        done.querySelector('[data-done-title]').textContent = `You're on the list, ${first}!`;
         form.reset();
-        show('success', 'You’re on the list. We’ll email you when Oqevira launches.');
+        syncRole();
+        form.hidden = true;
+        done.hidden = false;
+        done.focus();
       } catch (err) {
-        show('error', 'Something went wrong on our side. Please try again in a moment.');
+        show('error', 'We couldn’t reach the server. Check your connection and try again, or email support@oqevira.com.');
       } finally {
         btn.classList.remove('is-loading');
         btn.removeAttribute('aria-busy');
