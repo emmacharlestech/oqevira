@@ -87,3 +87,10 @@ Copy follows the brief. It doesn't claim a launch date, user numbers, partnershi
 ## Photography
 
 The photos are from [Unsplash](https://unsplash.com) and used under the Unsplash licence. Replace them with commissioned or licensed brand photography when it's available.
+
+## Speed and SEO
+
+- Every photo in `assets/img` has WebP copies at 640px and 1280px wide (`name-640.webp`, `name-1280.webp`, plus `-1920` for the hero). The page uses them through `srcset`, so phones download the small ones. The original JPGs are kept as sources; only `share.jpg` (the link preview) is used directly. When you add a photo, create the same two WebP sizes (for example with [sharp](https://sharp.pixelplumbing.com/) or squoosh.app).
+- Photos uploaded in the admin are resized automatically: a 1600px copy plus an 800px `-sm` copy for cards and the destination strip.
+- `.htaccess` sends `www.` and `http://` to `https://oqevira.com`, lets browsers keep CSS/JS for a year (their links carry `?v=`) and photos for a month, and makes the page itself always revalidate.
+- `robots.txt`, `sitemap.xml`, `site.webmanifest`, structured data (Organization + WebSite) and Open Graph / Twitter tags are in place. `vercel.json` marks the Vercel copy `noindex` so it never competes with oqevira.com in search.

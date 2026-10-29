@@ -1,0 +1,13 @@
+{
+  "name": "Oqevira",
+  "short_name": "Oqevira",
+  "description": "Flights, hotels, holiday homes, car hire, restaurants, local guides and event tickets in one travel app.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F8F7F3",
+  "theme_color": "#14213D",
+  "icons": [
+    { "src": "assets/brand/oqevira_ios_180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/brand/oqevira_icon_colour.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

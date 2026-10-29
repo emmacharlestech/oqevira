@@ -141,7 +141,7 @@ admin_header('Gallery', $admin, 'gallery');
 <?php foreach ($items as $n => $g): ?>
       <li class="gcard<?= $g['is_visible'] ? '' : ' is-hidden' ?>" id="g-<?= (int) $g['id'] ?>">
         <div class="gcard__thumb">
-          <img src="<?= e(admin_img($g['image'])) ?>" alt="<?= e($g['alt']) ?>" loading="lazy">
+          <img src="<?= e(admin_img(thumb_path($g['image']))) ?>" alt="<?= e($g['alt']) ?>" loading="lazy">
           <span class="gcard__pos"><?= $n + 1 ?></span>
         </div>
         <div class="gcard__body">

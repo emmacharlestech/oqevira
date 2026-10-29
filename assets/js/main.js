@@ -320,7 +320,7 @@ const OQ_CONFIG = {
     list.innerHTML = updates.map((u, i) => `
       <li class="post">
         <button type="button" class="post__btn" data-post="${i}">
-          ${u.image ? `<span class="post__img"><img src="${esc(imgUrl(u.image))}" alt="" loading="lazy"></span>` : ''}
+          ${u.image ? `<span class="post__img"><img src="${esc(imgUrl(u.thumb || u.image))}" alt="" loading="lazy"></span>` : ''}
           <span class="post__body">
             <span class="post__date">${esc(u.date)}</span>
             <span class="post__title">${esc(u.title)}</span>

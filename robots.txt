@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /backend/
+Disallow: /api/
+Disallow: /unsubscribe.php
+Disallow: /waitlist.php
+
+Sitemap: https://oqevira.com/sitemap.xml

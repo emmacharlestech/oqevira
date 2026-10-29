@@ -1,12 +1,13 @@
 <?php
 /**
  * Public content for the home page: published updates and the destination gallery.
- * GET → { ok, updates: [{ id, title, body, image, date }], gallery: [{ title, subtitle, image, alt }] }
- * Image paths are relative to the site root (e.g. uploads/…, assets/img/…).
+ * GET → { ok, updates: [{ id, title, body, image, thumb, date }], gallery: [{ title, subtitle, image, alt }] }
+ * Image paths are relative to the site root (e.g. uploads/…, assets/img/…). Cards and the
+ * gallery strip get the light thumbnail versions; `image` on an update is the full size for the reader.
  */
 declare(strict_types=1);
 
-require __DIR__ . '/../backend/bootstrap.php';
+require __DIR__ . '/../backend/images.php';
 
 allow_cors();
 header('Cache-Control: public, max-age=60');
@@ -30,7 +31,8 @@ echo json_encode([
         'title' => $u['title'],
         'body'  => $u['body'],
         'image' => $u['image'],
+        'thumb' => $u['image'] !== '' ? thumb_path($u['image']) : '',
         'date'  => date('j F Y', strtotime($u['published_at'])),
     ], $updates),
-    'gallery' => $gallery,
+    'gallery' => array_map(fn ($g) => ['image' => thumb_path($g['image'])] + $g, $gallery),
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

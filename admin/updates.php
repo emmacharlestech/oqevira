@@ -248,7 +248,7 @@ admin_header('Updates', $admin, 'updates');
 <?php foreach ($list as $u): ?>
       <li class="card ucard<?= $u['is_published'] ? '' : ' is-hidden' ?>" id="u-<?= (int) $u['id'] ?>">
 <?php if ($u['image'] !== ''): ?>
-        <img class="ucard__img" src="<?= e(admin_img($u['image'])) ?>" alt="">
+        <img class="ucard__img" src="<?= e(admin_img(thumb_path($u['image']))) ?>" loading="lazy" alt="">
 <?php endif; ?>
         <div class="ucard__body">
           <p class="ucard__meta">

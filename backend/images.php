@@ -8,7 +8,8 @@ declare(strict_types=1);
 require_once __DIR__ . '/bootstrap.php';
 
 const IMAGE_MAX_BYTES = 15 * 1024 * 1024;
-const IMAGE_MAX_EDGE  = 2000;
+const IMAGE_MAX_EDGE  = 1600;   // full size (update reader, large screens)
+const IMAGE_THUMB_EDGE = 800;   // "-sm" copy for cards and the destination strip
 const IMAGE_TYPES     = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
 
 /** True when the form included a file in this field. */
@@ -71,29 +72,52 @@ function save_image_upload(string $field): string
         }
     }
 
+    $ext = function_exists('imagewebp') ? '.webp' : '.jpg';
+    if (!resized_copy($src, IMAGE_MAX_EDGE, UPLOAD_DIR . '/' . $base . $ext, 80)
+        || !resized_copy($src, IMAGE_THUMB_EDGE, UPLOAD_DIR . '/' . $base . '-sm' . $ext, 76)) {
+        throw new RuntimeException('Couldn’t save the image on the server.');
+    }
+    return 'uploads/' . $base . $ext;
+}
+
+/** Save $src scaled down so its longest side is at most $edge (WebP when available). */
+function resized_copy(GdImage $src, int $edge, string $dest, int $quality): bool
+{
     $w = imagesx($src);
     $h = imagesy($src);
-    $scale = min(1, IMAGE_MAX_EDGE / max($w, $h));
+    $scale = min(1, $edge / max($w, $h));
     $nw = (int) round($w * $scale);
     $nh = (int) round($h * $scale);
     $dst = imagecreatetruecolor($nw, $nh);
     imagealphablending($dst, false);
     imagesavealpha($dst, true);
     imagecopyresampled($dst, $src, 0, 0, 0, 0, $nw, $nh, $w, $h);
-
-    $webp = function_exists('imagewebp');
-    $name = $base . ($webp ? '.webp' : '.jpg');
-    $ok = $webp ? imagewebp($dst, UPLOAD_DIR . '/' . $name, 82) : imagejpeg($dst, UPLOAD_DIR . '/' . $name, 84);
-    if (!$ok) {
-        throw new RuntimeException('Couldn’t save the image on the server.');
-    }
-    return 'uploads/' . $name;
+    return str_ends_with($dest, '.webp') ? imagewebp($dst, $dest, $quality) : imagejpeg($dst, $dest, $quality);
 }
 
-/** Remove an uploaded file (never touches the built-in assets/ photos). */
+/**
+ * The lighter version of an image for cards and strips: the "-sm" copy of an upload,
+ * or the 640px WebP of a built-in photo. Falls back to the image itself.
+ */
+function thumb_path(string $path): string
+{
+    $candidates = [
+        preg_replace('#^(uploads/[\w-]+)(\.\w+)$#', '$1-sm$2', $path),
+        preg_replace('#^(assets/img/[\w-]+)\.jpg$#', '$1-640.webp', $path),
+    ];
+    foreach ($candidates as $c) {
+        if ($c !== $path && is_file(SITE_DIR . '/' . $c)) return $c;
+    }
+    return $path;
+}
+
+/** Remove an uploaded file and its thumbnail (never touches the built-in assets/ photos). */
 function delete_upload(string $path): void
 {
-    if (preg_match('#^uploads/[\w.-]+$#', $path) && is_file(SITE_DIR . '/' . $path)) {
-        @unlink(SITE_DIR . '/' . $path);
+    if (!preg_match('#^uploads/[\w.-]+$#', $path)) {
+        return;
+    }
+    foreach ([$path, preg_replace('#(\.\w+)$#', '-sm$1', $path)] as $p) {
+        if (is_file(SITE_DIR . '/' . $p)) @unlink(SITE_DIR . '/' . $p);
     }
 }

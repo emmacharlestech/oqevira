@@ -3,31 +3,72 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Oqevira — Your next great story starts here</title>
-  <meta name="description" content="Oqevira is an upcoming travel app: flights, hotels, holiday homes, car hire, restaurants, local guides and event tickets in one place. Join the waitlist. Coming soon to iPhone and Android.">
+  <title>Oqevira: Flights, Hotels, Car Hire &amp; Local Guides in One Travel App</title>
+  <meta name="description" content="Oqevira is the all-in-one travel app for flights, hotels, holiday rentals, car hire, restaurants, local tour guides and event tickets, with one secure checkout. Join the waitlist.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#14213D">
 
   <link rel="canonical" href="https://oqevira.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Oqevira">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:url" content="https://oqevira.com/">
-  <meta property="og:title" content="Oqevira — Your next great story starts here">
+  <meta property="og:title" content="Oqevira: one travel app for your whole trip">
   <meta property="og:description" content="One app. Seven things. Flights, hotels, holiday homes, car hire, restaurants, local guides and event tickets. Launching soon, join the waitlist.">
   <meta property="og:image" content="https://oqevira.com/assets/img/share.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="A wooden rowing boat on a turquoise alpine lake surrounded by mountains">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Oqevira: one travel app for your whole trip">
+  <meta name="twitter:description" content="Flights, hotels, holiday homes, car hire, restaurants, local guides and event tickets in one app. Launching soon, join the waitlist.">
+  <meta name="twitter:image" content="https://oqevira.com/assets/img/share.jpg">
 
   <link rel="icon" href="assets/brand/oqevira_icon_colour.svg" type="image/svg+xml">
   <link rel="icon" href="assets/brand/oqevira_favicon_32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/brand/oqevira_ios_180.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Hero photo first: it's the largest thing on screen -->
+  <link rel="preload" as="image" href="assets/img/hero-braies-1280.webp" imagesrcset="assets/img/hero-braies-640.webp 640w, assets/img/hero-braies-1280.webp 1280w, assets/img/hero-braies-1920.webp 1920w" imagesizes="100vw" fetchpriority="high">
+  <!-- Font loads without blocking the first paint (system font shows until Manrope arrives) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/img/hero-braies.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://oqevira.com/#organization",
+        "name": "Oqevira",
+        "url": "https://oqevira.com/",
+        "logo": "https://oqevira.com/assets/brand/oqevira_ios_180.png",
+        "email": "support@oqevira.com",
+        "description": "Oqevira is a travel discovery and booking marketplace that brings flights, hotels, holiday rentals, car hire, restaurants, local tour guides and event tickets together in one app.",
+        "sameAs": [
+          "https://www.instagram.com/oqevira/",
+          "https://www.tiktok.com/@oqeviratravel",
+          "https://www.youtube.com/@OqeviraTravel"
+        ],
+        "contactPoint": { "@type": "ContactPoint", "contactType": "customer support", "email": "support@oqevira.com" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://oqevira.com/#website",
+        "url": "https://oqevira.com/",
+        "name": "Oqevira",
+        "publisher": { "@id": "https://oqevira.com/#organization" },
+        "inLanguage": "en"
+      }
+    ]
+  }
+  </script>
   <!-- Bump ?v= on every release: the host lets browsers cache CSS/JS for a week -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261030a">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261030b">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -115,7 +156,7 @@
   <!-- ============ HERO ============ -->
   <section class="hero" id="top" aria-labelledby="hero-title">
     <div class="hero__media" aria-hidden="true">
-      <img class="hero__img" src="assets/img/hero-braies.jpg" alt="" data-parallax>
+      <img class="hero__img" src="assets/img/hero-braies-1280.webp" srcset="assets/img/hero-braies-640.webp 640w, assets/img/hero-braies-1280.webp 1280w, assets/img/hero-braies-1920.webp 1920w" sizes="100vw" fetchpriority="high" alt="" data-parallax>
     </div>
     <div class="hero__shade" aria-hidden="true"></div>
 
@@ -149,7 +190,7 @@
 
       <div class="hero__visual" data-reveal style="--d:.2s">
         <figure class="postcard">
-          <img src="assets/img/santorini.jpg" alt="Whitewashed cliffside village of Oia on Santorini at dusk">
+          <img src="assets/img/santorini-1280.webp" srcset="assets/img/santorini-640.webp 640w, assets/img/santorini-1280.webp 1280w" sizes="(max-width: 640px) 36vw, 240px" decoding="async" alt="Whitewashed cliffside village of Oia on Santorini at dusk">
           <figcaption><svg aria-hidden="true"><use href="#i-pin"/></svg>Santorini, Greece</figcaption>
         </figure>
 
@@ -178,7 +219,7 @@
                 <span class="is-active">All</span><span>Flights</span><span>Hotels</span><span>Homes</span><span>Car hire</span><span>Tables</span>
               </div>
 
-              <div class="ui-feature" style="background-image:url('assets/img/maldives.jpg')">
+              <div class="ui-feature" style="background-image:url('assets/img/maldives-640.webp')">
                 <span class="ui-feature__heart"><svg><use href="#i-heart"/></svg></span>
                 <div class="ui-feature__body">
                   <span class="ui-tag">Island escapes</span>
@@ -189,8 +230,8 @@
 
               <div class="ui-rowhead"><span>Experiences</span><span class="ui-link">See all</span></div>
               <div class="ui-minis">
-                <div class="ui-mini"><span class="ui-mini__img" style="background-image:url('assets/img/cappadocia.jpg')"></span><p>Balloon flights</p><small>Cappadocia</small></div>
-                <div class="ui-mini"><span class="ui-mini__img" style="background-image:url('assets/img/bali-temple.jpg')"></span><p>Temple trails</p><small>Bali</small></div>
+                <div class="ui-mini"><span class="ui-mini__img" style="background-image:url('assets/img/cappadocia-640.webp')"></span><p>Balloon flights</p><small>Cappadocia</small></div>
+                <div class="ui-mini"><span class="ui-mini__img" style="background-image:url('assets/img/bali-temple-640.webp')"></span><p>Temple trails</p><small>Bali</small></div>
               </div>
             </div>
 
@@ -223,37 +264,37 @@
 
       <ul class="seven__grid">
         <li class="tile tile--fl" data-reveal style="--d:.04s">
-          <img class="tile__img" src="assets/img/f-flights.jpg" alt="" loading="lazy">
+          <img class="tile__img" src="assets/img/f-flights-1280.webp" srcset="assets/img/f-flights-640.webp 640w, assets/img/f-flights-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" decoding="async" alt="" loading="lazy">
           <span class="tile__icon" aria-hidden="true"><svg><use href="#i-plane"/></svg></span>
           <div class="tile__body"><span class="tile__num">01</span><h3>Flights</h3><p>Find it. Book it.</p></div>
         </li>
         <li class="tile tile--ho" data-reveal style="--d:.1s">
-          <img class="tile__img" src="assets/img/f-hotels.jpg" alt="" loading="lazy">
+          <img class="tile__img" src="assets/img/f-hotels-1280.webp" srcset="assets/img/f-hotels-640.webp 640w, assets/img/f-hotels-1280.webp 1280w" sizes="(max-width: 960px) 50vw, 25vw" decoding="async" alt="" loading="lazy">
           <span class="tile__icon" aria-hidden="true"><svg><use href="#i-bed"/></svg></span>
           <div class="tile__body"><span class="tile__num">02</span><h3>Hotels</h3><p>Your place to stay</p></div>
         </li>
         <li class="tile tile--hm" data-reveal style="--d:.16s">
-          <img class="tile__img" src="assets/img/f-homes.jpg" alt="" loading="lazy">
+          <img class="tile__img" src="assets/img/f-homes-1280.webp" srcset="assets/img/f-homes-640.webp 640w, assets/img/f-homes-1280.webp 1280w" sizes="(max-width: 960px) 50vw, 25vw" decoding="async" alt="" loading="lazy">
           <span class="tile__icon" aria-hidden="true"><svg><use href="#i-home"/></svg></span>
           <div class="tile__body"><span class="tile__num">03</span><h3>Holiday homes</h3><p>Stay somewhere you'll love</p></div>
         </li>
         <li class="tile tile--ca" data-reveal style="--d:.1s">
-          <img class="tile__img" src="assets/img/f-carhire.jpg" alt="" loading="lazy">
+          <img class="tile__img" src="assets/img/f-carhire-1280.webp" srcset="assets/img/f-carhire-640.webp 640w, assets/img/f-carhire-1280.webp 1280w" sizes="(max-width: 960px) 50vw, 25vw" decoding="async" alt="" loading="lazy">
           <span class="tile__icon" aria-hidden="true"><svg><use href="#i-car"/></svg></span>
           <div class="tile__body"><span class="tile__num">04</span><h3>Car hire</h3><p>Ready when you land</p></div>
         </li>
         <li class="tile tile--re" data-reveal style="--d:.16s">
-          <img class="tile__img" src="assets/img/f-restaurants.jpg" alt="" loading="lazy">
+          <img class="tile__img" src="assets/img/f-restaurants-1280.webp" srcset="assets/img/f-restaurants-640.webp 640w, assets/img/f-restaurants-1280.webp 1280w" sizes="(max-width: 960px) 50vw, 25vw" decoding="async" alt="" loading="lazy">
           <span class="tile__icon" aria-hidden="true"><svg><use href="#i-utensils"/></svg></span>
           <div class="tile__body"><span class="tile__num">05</span><h3>Restaurants</h3><p>Book the table</p></div>
         </li>
         <li class="tile tile--lg" data-reveal style="--d:.08s">
-          <img class="tile__img" src="assets/img/old-town.jpg" alt="" loading="lazy">
+          <img class="tile__img" src="assets/img/old-town-1280.webp" srcset="assets/img/old-town-640.webp 640w, assets/img/old-town-1280.webp 1280w" sizes="(max-width: 960px) 50vw, 25vw" decoding="async" alt="" loading="lazy">
           <span class="tile__icon" aria-hidden="true"><svg><use href="#i-users"/></svg></span>
           <div class="tile__body"><span class="tile__num">06</span><h3>Local guides</h3><p>Real people, real tips</p></div>
         </li>
         <li class="tile tile--ev" data-reveal style="--d:.14s">
-          <img class="tile__img" src="assets/img/f-events.jpg" alt="" loading="lazy">
+          <img class="tile__img" src="assets/img/f-events-1280.webp" srcset="assets/img/f-events-640.webp 640w, assets/img/f-events-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 75vw" decoding="async" alt="" loading="lazy">
           <span class="tile__icon" aria-hidden="true"><svg><use href="#i-ticket"/></svg></span>
           <div class="tile__body"><span class="tile__num">07</span><h3>Event tickets</h3><p>Gigs, games and shows, sorted</p></div>
           <span class="tile__stub" aria-hidden="true"><small>Admit</small>One</span>
@@ -317,11 +358,11 @@
               <div class="ui-seg"><span class="is-active">Trip</span><span>Ideas</span><span>Saved</span></div>
 
               <ul class="ui-list">
-                <li><span class="ui-list__img" style="background-image:url('assets/img/f-flights.jpg')"></span><div><small>Flights</small><p>Fly to Bali</p><span class="ui-loc"><svg><use href="#i-plane"/></svg>Denpasar, Indonesia</span></div><svg class="ui-list__heart is-on"><use href="#i-heart"/></svg></li>
-                <li><span class="ui-list__img" style="background-image:url('assets/img/f-homes.jpg')"></span><div><small>Holiday homes</small><p>Villa with a pool</p><span class="ui-loc"><svg><use href="#i-pin"/></svg>Ubud, Bali</span></div><svg class="ui-list__heart"><use href="#i-heart"/></svg></li>
-                <li><span class="ui-list__img" style="background-image:url('assets/img/f-carhire.jpg')"></span><div><small>Car hire</small><p>Ready when you land</p><span class="ui-loc"><svg><use href="#i-car"/></svg>Airport pick-up</span></div><svg class="ui-list__heart"><use href="#i-heart"/></svg></li>
-                <li><span class="ui-list__img" style="background-image:url('assets/img/f-restaurants.jpg')"></span><div><small>Restaurants</small><p>Dinner by the water</p><span class="ui-loc"><svg><use href="#i-pin"/></svg>Jimbaran Bay</span></div><svg class="ui-list__heart is-on"><use href="#i-heart"/></svg></li>
-                <li><span class="ui-list__img" style="background-image:url('assets/img/bali-temple.jpg')"></span><div><small>Local guides</small><p>Temple trails</p><span class="ui-loc"><svg><use href="#i-users"/></svg>With a local guide</span></div><svg class="ui-list__heart"><use href="#i-heart"/></svg></li>
+                <li><span class="ui-list__img" style="background-image:url('assets/img/f-flights-640.webp')"></span><div><small>Flights</small><p>Fly to Bali</p><span class="ui-loc"><svg><use href="#i-plane"/></svg>Denpasar, Indonesia</span></div><svg class="ui-list__heart is-on"><use href="#i-heart"/></svg></li>
+                <li><span class="ui-list__img" style="background-image:url('assets/img/f-homes-640.webp')"></span><div><small>Holiday homes</small><p>Villa with a pool</p><span class="ui-loc"><svg><use href="#i-pin"/></svg>Ubud, Bali</span></div><svg class="ui-list__heart"><use href="#i-heart"/></svg></li>
+                <li><span class="ui-list__img" style="background-image:url('assets/img/f-carhire-640.webp')"></span><div><small>Car hire</small><p>Ready when you land</p><span class="ui-loc"><svg><use href="#i-car"/></svg>Airport pick-up</span></div><svg class="ui-list__heart"><use href="#i-heart"/></svg></li>
+                <li><span class="ui-list__img" style="background-image:url('assets/img/f-restaurants-640.webp')"></span><div><small>Restaurants</small><p>Dinner by the water</p><span class="ui-loc"><svg><use href="#i-pin"/></svg>Jimbaran Bay</span></div><svg class="ui-list__heart is-on"><use href="#i-heart"/></svg></li>
+                <li><span class="ui-list__img" style="background-image:url('assets/img/bali-temple-640.webp')"></span><div><small>Local guides</small><p>Temple trails</p><span class="ui-loc"><svg><use href="#i-users"/></svg>With a local guide</span></div><svg class="ui-list__heart"><use href="#i-heart"/></svg></li>
               </ul>
             </div>
             <div class="ui-tabbar">
@@ -336,7 +377,7 @@
         <div class="phone phone--b" data-reveal style="--d:.22s" role="img" aria-label="Concept illustration of a destination page for Ha Long Bay in the Oqevira app">
           <div class="phone__screen" aria-hidden="true">
             <div class="phone__island"></div>
-            <div class="ui-hero" style="background-image:url('assets/img/halong.jpg')">
+            <div class="ui-hero" style="background-image:url('assets/img/halong-640.webp')">
               <div class="ui-status ui-status--light"><span>9:41</span><span class="ui-status__icons"><i class="sig"></i><i class="wifi"></i><i class="bat"></i></span></div>
               <div class="ui-hero__btns"><span class="ui-glass"><svg><use href="#i-chev-l"/></svg></span><span class="ui-glass"><svg><use href="#i-heart"/></svg></span></div>
               <div class="ui-hero__dots"><i class="is-on"></i><i></i><i></i></div>
@@ -347,9 +388,9 @@
               <div class="ui-tags"><span>Bays</span><span>Kayaking</span><span>Caves</span></div>
               <p class="ui-rowhead"><span>Things to do</span><span class="ui-link">See all</span></p>
               <div class="ui-thumbs">
-                <span style="background-image:url('assets/img/halong.jpg');--pos:80% 60%"></span>
-                <span style="background-image:url('assets/img/old-town.jpg')"></span>
-                <span style="background-image:url('assets/img/travellers.jpg')"></span>
+                <span style="background-image:url('assets/img/halong-640.webp');--pos:80% 60%"></span>
+                <span style="background-image:url('assets/img/old-town-640.webp')"></span>
+                <span style="background-image:url('assets/img/travellers-640.webp')"></span>
               </div>
               <div class="ui-guide">
                 <span class="ui-guide__avatar"><svg><use href="#i-users"/></svg></span>
@@ -379,7 +420,7 @@
 
       <div class="cards" data-cards>
         <article class="card" data-reveal style="--d:.05s">
-          <img class="card__img" src="assets/img/halong.jpg" alt="Limestone islands rising from the emerald water of Ha Long Bay" loading="lazy">
+          <img class="card__img" src="assets/img/halong-1280.webp" srcset="assets/img/halong-640.webp 640w, assets/img/halong-1280.webp 1280w" sizes="(max-width: 640px) 82vw, (max-width: 1180px) 50vw, 25vw" decoding="async" alt="Limestone islands rising from the emerald water of Ha Long Bay" loading="lazy">
           <div class="card__body">
             <span class="card__num">01</span>
             <h3 class="card__title">Discover Destinations</h3>
@@ -388,7 +429,7 @@
           <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow-ur"/></svg></span>
         </article>
         <article class="card" data-reveal style="--d:.12s">
-          <img class="card__img" src="assets/img/tokyo-alley.jpg" alt="Narrow evening alley lined with glowing lanterns and small eateries in Japan" loading="lazy">
+          <img class="card__img" src="assets/img/tokyo-alley-1280.webp" srcset="assets/img/tokyo-alley-640.webp 640w, assets/img/tokyo-alley-1280.webp 1280w" sizes="(max-width: 640px) 82vw, (max-width: 1180px) 50vw, 25vw" decoding="async" alt="Narrow evening alley lined with glowing lanterns and small eateries in Japan" loading="lazy">
           <div class="card__body">
             <span class="card__num">02</span>
             <h3 class="card__title">Explore Experiences</h3>
@@ -397,7 +438,7 @@
           <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow-ur"/></svg></span>
         </article>
         <article class="card" data-reveal style="--d:.19s">
-          <img class="card__img" src="assets/img/travellers.jpg" alt="Group of friends laughing together on a mountain trail" loading="lazy">
+          <img class="card__img" src="assets/img/travellers-1280.webp" srcset="assets/img/travellers-640.webp 640w, assets/img/travellers-1280.webp 1280w" sizes="(max-width: 640px) 82vw, (max-width: 1180px) 50vw, 25vw" decoding="async" alt="Group of friends laughing together on a mountain trail" loading="lazy">
           <div class="card__body">
             <span class="card__num">03</span>
             <h3 class="card__title">Connect With Local Guides</h3>
@@ -406,7 +447,7 @@
           <span class="card__arrow" aria-hidden="true"><svg><use href="#i-arrow-ur"/></svg></span>
         </article>
         <article class="card" data-reveal style="--d:.26s">
-          <img class="card__img" src="assets/img/map-flatlay.jpg" alt="Paper map laid out with a camera, notebook and travel brochures" loading="lazy">
+          <img class="card__img" src="assets/img/map-flatlay-1280.webp" srcset="assets/img/map-flatlay-640.webp 640w, assets/img/map-flatlay-1280.webp 1280w" sizes="(max-width: 640px) 82vw, (max-width: 1180px) 50vw, 25vw" decoding="async" alt="Paper map laid out with a camera, notebook and travel brochures" loading="lazy">
           <div class="card__body">
             <span class="card__num">04</span>
             <h3 class="card__title">Plan Your Next Escape</h3>
@@ -429,13 +470,13 @@
       </div>
     </div>
     <ul class="ribbon__track" data-ribbon tabindex="0" aria-label="Destination inspiration">
-      <li class="dest"><img src="assets/img/venice.jpg" alt="Gondola passing the Rialto Bridge in Venice" loading="lazy"><p><strong>Venice</strong><span>Italy</span></p></li>
-      <li class="dest"><img src="assets/img/giza.jpg" alt="The pyramids of Giza rising from the desert" loading="lazy"><p><strong>Giza</strong><span>Egypt</span></p></li>
-      <li class="dest"><img src="assets/img/cappadocia.jpg" alt="Hot-air balloons drifting over Cappadocia's valleys" loading="lazy"><p><strong>Cappadocia</strong><span>Türkiye</span></p></li>
-      <li class="dest"><img src="assets/img/paris.jpg" alt="The Eiffel Tower and the Seine at dusk" loading="lazy"><p><strong>Paris</strong><span>France</span></p></li>
-      <li class="dest"><img src="assets/img/safari.jpg" alt="Safari vehicle on the savannah at sunset" loading="lazy"><p><strong>The savannah</strong><span>Safari country</span></p></li>
-      <li class="dest"><img src="assets/img/bali-temple.jpg" alt="Lakeside temple with a tiered roof in Bali" loading="lazy"><p><strong>Bali</strong><span>Indonesia</span></p></li>
-      <li class="dest"><img src="assets/img/old-town.jpg" alt="Traveller with a backpack walking a cobbled old-town lane" loading="lazy"><p><strong>Old-town lanes</strong><span>Wander slowly</span></p></li>
+      <li class="dest"><img src="assets/img/venice-1280.webp" srcset="assets/img/venice-640.webp 640w, assets/img/venice-1280.webp 1280w" sizes="(max-width: 640px) 64vw, 300px" decoding="async" alt="Gondola passing the Rialto Bridge in Venice" loading="lazy"><p><strong>Venice</strong><span>Italy</span></p></li>
+      <li class="dest"><img src="assets/img/giza-1280.webp" srcset="assets/img/giza-640.webp 640w, assets/img/giza-1280.webp 1280w" sizes="(max-width: 640px) 64vw, 300px" decoding="async" alt="The pyramids of Giza rising from the desert" loading="lazy"><p><strong>Giza</strong><span>Egypt</span></p></li>
+      <li class="dest"><img src="assets/img/cappadocia-1280.webp" srcset="assets/img/cappadocia-640.webp 640w, assets/img/cappadocia-1280.webp 1280w" sizes="(max-width: 640px) 64vw, 300px" decoding="async" alt="Hot-air balloons drifting over Cappadocia's valleys" loading="lazy"><p><strong>Cappadocia</strong><span>Türkiye</span></p></li>
+      <li class="dest"><img src="assets/img/paris-1280.webp" srcset="assets/img/paris-640.webp 640w, assets/img/paris-1280.webp 1280w" sizes="(max-width: 640px) 64vw, 300px" decoding="async" alt="The Eiffel Tower and the Seine at dusk" loading="lazy"><p><strong>Paris</strong><span>France</span></p></li>
+      <li class="dest"><img src="assets/img/safari-1280.webp" srcset="assets/img/safari-640.webp 640w, assets/img/safari-1280.webp 1280w" sizes="(max-width: 640px) 64vw, 300px" decoding="async" alt="Safari vehicle on the savannah at sunset" loading="lazy"><p><strong>The savannah</strong><span>Safari country</span></p></li>
+      <li class="dest"><img src="assets/img/bali-temple-1280.webp" srcset="assets/img/bali-temple-640.webp 640w, assets/img/bali-temple-1280.webp 1280w" sizes="(max-width: 640px) 64vw, 300px" decoding="async" alt="Lakeside temple with a tiered roof in Bali" loading="lazy"><p><strong>Bali</strong><span>Indonesia</span></p></li>
+      <li class="dest"><img src="assets/img/old-town-1280.webp" srcset="assets/img/old-town-640.webp 640w, assets/img/old-town-1280.webp 1280w" sizes="(max-width: 640px) 64vw, 300px" decoding="async" alt="Traveller with a backpack walking a cobbled old-town lane" loading="lazy"><p><strong>Old-town lanes</strong><span>Wander slowly</span></p></li>
     </ul>
   </section>
 
@@ -450,8 +491,8 @@
           <p class="about__text" data-reveal style="--d:.18s">Whether you are an adventurous solo backpacker mapping out a rugged route, a luxury traveler booking an exclusive getaway, or a family planning a seamless holiday, Oqevira brings your entire itinerary together. Built on a sleek, minimalist tech framework and powered by authorized global partners, our platform allows you to search, compare, and coordinate your complete travel experience with one single, secure checkout.</p>
         </div>
         <div class="about__visual" data-reveal style="--d:.1s">
-          <img class="about__photo" src="assets/img/travellers.jpg" alt="Group of friends laughing together on a mountain trail" loading="lazy">
-          <img class="about__photo about__photo--small" src="assets/img/map-flatlay.jpg" alt="" loading="lazy">
+          <img class="about__photo" src="assets/img/travellers-1280.webp" srcset="assets/img/travellers-640.webp 640w, assets/img/travellers-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" decoding="async" alt="Group of friends laughing together on a mountain trail" loading="lazy">
+          <img class="about__photo about__photo--small" src="assets/img/map-flatlay-1280.webp" srcset="assets/img/map-flatlay-640.webp 640w, assets/img/map-flatlay-1280.webp 1280w" sizes="(max-width: 640px) 40vw, 240px" decoding="async" alt="" loading="lazy">
           <div class="about__badge">
             <img src="assets/brand/oqevira_icon_colour.svg" alt="" width="36" height="36">
             <p><strong>7 pillars of travel</strong><span>One single, secure checkout</span></p>
@@ -530,7 +571,7 @@
   <!-- ============ LAUNCH + SIGNUP ============ -->
   <section class="launch" id="launch" aria-labelledby="launch-title">
     <div class="launch__bg" aria-hidden="true">
-      <img src="assets/img/above-clouds.jpg" alt="" loading="lazy">
+      <img src="assets/img/above-clouds-1280.webp" srcset="assets/img/above-clouds-640.webp 640w, assets/img/above-clouds-1280.webp 1280w" sizes="100vw" decoding="async" alt="" loading="lazy">
       <span class="launch__sun"></span>
     </div>
     <div class="container launch__inner">
@@ -721,7 +762,7 @@
           <p class="download__fine" data-reveal style="--d:.22s"><svg aria-hidden="true"><use href="#i-info"/></svg><span>Not yet available to install. <a href="#updates">Join the waitlist</a> to hear first.</span></p>
         </div>
         <div class="download__visual" data-reveal style="--d:.1s">
-          <img src="assets/img/beach-palm.jpg" alt="Palm tree on a white-sand beach beside turquoise water" loading="lazy">
+          <img src="assets/img/beach-palm-1280.webp" srcset="assets/img/beach-palm-640.webp 640w, assets/img/beach-palm-1280.webp 1280w" sizes="(max-width: 960px) 100vw, 50vw" decoding="async" alt="Palm tree on a white-sand beach beside turquoise water" loading="lazy">
           <div class="download__badge">
             <img class="download__icon" src="assets/brand/oqevira_icon_colour.svg" alt="" width="34" height="34">
             <div><strong>Launching soon</strong><span>iOS &amp; Android</span></div>
@@ -789,6 +830,6 @@
   <a href="#updates" class="btn btn--coral">Join waitlist</a>
 </div>
 
-<script src="assets/js/main.js?v=20261030a" defer></script>
+<script src="assets/js/main.js?v=20261030b" defer></script>
 </body>
 </html>
