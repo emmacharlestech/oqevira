@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/img/hero-braies.jpg" fetchpriority="high">
   <!-- Bump ?v= on every release: the host lets browsers cache CSS/JS for a week -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261029b">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261030a">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -74,7 +74,9 @@
     <symbol id="i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13.5" rx="2.5"/><path d="M16 20.5V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v15.5"/></symbol>
     <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4.5c4-2.5 7 2.5 14 0v9c-7 2.5-10-2.5-14 0"/></symbol>
     <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.3 7.6L3 21l1.4-5.4A8.5 8.5 0 1 1 21 12z"/></symbol>
-    <symbol id="i-mail"viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 11.6a1.8 1.8 0 0 0 1.8 1.4h8.4a1.8 1.8 0 0 0 1.8-1.4L21 7H6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s8-3.6 8-10.2V5l-8-2.8L4 5v6.3c0 6.6 8 10.2 8 10.2z"/><path d="m8.6 11.8 2.4 2.4 4.6-4.8"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
   </defs>
 </svg>
 
@@ -437,6 +439,68 @@
     </ul>
   </section>
 
+  <!-- ============ ABOUT US ============ -->
+  <section class="section about" id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="about__intro">
+        <div class="about__copy">
+          <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>About us</p>
+          <h2 class="h2" id="about-title" data-reveal style="--d:.06s">Welcome to Oqevira</h2>
+          <p class="lead about__lead" data-reveal style="--d:.12s">Oqevira is a next-generation travel discovery and booking marketplace engineered to simplify global exploration. We believe that planning a journey shouldn’t require bouncing between dozens of different apps and websites.</p>
+          <p class="about__text" data-reveal style="--d:.18s">Whether you are an adventurous solo backpacker mapping out a rugged route, a luxury traveler booking an exclusive getaway, or a family planning a seamless holiday, Oqevira brings your entire itinerary together. Built on a sleek, minimalist tech framework and powered by authorized global partners, our platform allows you to search, compare, and coordinate your complete travel experience with one single, secure checkout.</p>
+        </div>
+        <div class="about__visual" data-reveal style="--d:.1s">
+          <img class="about__photo" src="assets/img/travellers.jpg" alt="Group of friends laughing together on a mountain trail" loading="lazy">
+          <img class="about__photo about__photo--small" src="assets/img/map-flatlay.jpg" alt="" loading="lazy">
+          <div class="about__badge">
+            <img src="assets/brand/oqevira_icon_colour.svg" alt="" width="36" height="36">
+            <p><strong>7 pillars of travel</strong><span>One single, secure checkout</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="eco">
+        <div class="eco__head">
+          <h3 class="eco__title" data-reveal>Our Ecosystem: Everything You Need in One Place</h3>
+          <p class="eco__lead" data-reveal style="--d:.06s">Behind our clean interface sits a powerful, interface-driven provider network that seamlessly integrates seven core pillars of travel and hospitality:</p>
+        </div>
+        <ul class="eco__list">
+          <li data-reveal style="--d:.04s"><span class="eco__icon" aria-hidden="true"><svg><use href="#i-plane"/></svg></span><div><h4>Global Flights</h4><p>Search, compare, and instantly book routes across low-cost and commercial airlines worldwide. All flight-inclusive bookings are fully protected through our licensed, authorized travel partners and come with statutory consumer protection certificates automatically.</p></div></li>
+          <li data-reveal style="--d:.1s"><span class="eco__icon" aria-hidden="true"><svg><use href="#i-bed"/></svg></span><div><h4>Hotels &amp; Luxury Resorts</h4><p>Access wholesale rates and real-time room availability across hundreds of thousands of boutique properties, business hotels, and premium international resorts.</p></div></li>
+          <li data-reveal style="--d:.04s"><span class="eco__icon" aria-hidden="true"><svg><use href="#i-home"/></svg></span><div><h4>Airbnb-Style Vacation Rentals</h4><p>Discover curated private villas, cozy apartments, and off-the-beaten-path homes perfect for families, remote workers, or solo individual stays.</p></div></li>
+          <li data-reveal style="--d:.1s"><span class="eco__icon" aria-hidden="true"><svg><use href="#i-car"/></svg></span><div><h4>Car Hire &amp; Ground Transit</h4><p>Stay mobile wherever you land. Instantly secure car rentals from leading global brands and verified local fleets, filtering by vehicle class, location, and transmission.</p></div></li>
+          <li data-reveal style="--d:.04s"><span class="eco__icon" aria-hidden="true"><svg><use href="#i-utensils"/></svg></span><div><h4>Restaurant &amp; Culinary Discovery</h4><p>Explore local dining scenes, read real customer reviews, and make reservations at top-rated restaurants, street food hubs, and luxury fine-dining establishments in your destination city.</p></div></li>
+          <li data-reveal style="--d:.1s"><span class="eco__icon" aria-hidden="true"><svg><use href="#i-flag"/></svg></span><div><h4>Local Tour Guides &amp; Experiences</h4><p>Connect with fully verified, licensed local guides. Discover unique tours, historic excursions, and custom day-trips with confidence, knowing every local host undergoes background compliance screening.</p></div></li>
+          <li class="eco__wide" data-reveal style="--d:.04s"><span class="eco__icon" aria-hidden="true"><svg><use href="#i-ticket"/></svg></span><div><h4>Live Events &amp; Attractions</h4><p>Never miss out on local culture. Buy tickets directly inside the app for major concerts, sports matches, theater productions, theme parks, and hidden tourist hotspots.</p></div></li>
+        </ul>
+      </div>
+
+      <div class="why">
+        <h3 class="why__title" data-reveal>Why Choose Oqevira?</h3>
+        <ol class="why__list">
+          <li data-reveal style="--d:.04s">
+            <span class="why__num">01</span>
+            <span class="why__icon" aria-hidden="true"><svg><use href="#i-cart"/></svg></span>
+            <h4>Unified Checkout</h4>
+            <p>Add your flight, hotel, rental car, tour guide, and event tickets to a single digital cart and pay for them all at once. Our smart payment split-routing system handles the rest.</p>
+          </li>
+          <li data-reveal style="--d:.12s">
+            <span class="why__num">02</span>
+            <span class="why__icon" aria-hidden="true"><svg><use href="#i-route"/></svg></span>
+            <h4>Dynamic Itinerary Builder</h4>
+            <p>As you book different services, Oqevira automatically builds a synchronized, day-by-day digital schedule with live maps showing the distances between your stay, your car pickup, and your evening events.</p>
+          </li>
+          <li data-reveal style="--d:.2s">
+            <span class="why__num">03</span>
+            <span class="why__icon" aria-hidden="true"><svg><use href="#i-shield"/></svg></span>
+            <h4>Absolute Transparency</h4>
+            <p>No hidden fees, no surprise markups. We provide clear pricing, flexible cancellation options, and immediate digital voucher generation straight to your smartphone.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ LATEST UPDATES (filled from Admin → Updates; hidden until one is posted) ============ -->
   <section class="section news" id="news" aria-labelledby="news-title" data-news hidden>
     <div class="container">
@@ -464,7 +528,7 @@
   </dialog>
 
   <!-- ============ LAUNCH + SIGNUP ============ -->
-  <section class="launch" id="about" aria-labelledby="launch-title">
+  <section class="launch" id="launch" aria-labelledby="launch-title">
     <div class="launch__bg" aria-hidden="true">
       <img src="assets/img/above-clouds.jpg" alt="" loading="lazy">
       <span class="launch__sun"></span>
@@ -693,6 +757,7 @@
             <li><a href="#features">Features</a></li>
             <li><a href="#discover">Discover</a></li>
             <li><a href="#experiences">Experiences</a></li>
+            <li><a href="#about">About us</a></li>
             <li><a href="#updates">Join the waitlist</a></li>
           </ul>
         </div>
@@ -724,6 +789,6 @@
   <a href="#updates" class="btn btn--coral">Join waitlist</a>
 </div>
 
-<script src="assets/js/main.js?v=20261029b" defer></script>
+<script src="assets/js/main.js?v=20261030a" defer></script>
 </body>
 </html>
