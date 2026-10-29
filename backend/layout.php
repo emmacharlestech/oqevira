@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-const ADMIN_ASSET_VERSION = '2';
+const ADMIN_ASSET_VERSION = '3';
 
 function admin_header(string $title, ?array $admin = null, string $active = ''): void
 {

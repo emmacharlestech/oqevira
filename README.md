@@ -48,7 +48,7 @@ Spam protection: a hidden honeypot field, a minimum fill time, a limit of 5 sign
 | --- | --- |
 | Dashboard | Waitlist totals, who is signing up, the most wanted features, latest sign-ups |
 | Waitlist | Search and filter sign-ups, email / WhatsApp / call them, mark as contacted, resend the welcome email, delete, download as CSV |
-| Updates | Post news with a photo; published posts appear in “Latest from Oqevira” on the home page |
+| Updates | Post news with a photo; published posts appear in “Latest from Oqevira” on the home page. Optionally email a post to Everyone, Travellers, Tour guides, Travel businesses or one person: each person gets their own copy with an unsubscribe link (`unsubscribe.php`), and nobody gets the same update twice. Large lists go out 80 per click to stay within the host’s hourly mail limit |
 | Gallery | Upload, reorder, hide and delete the photos in “Where will your story begin?” |
 | Settings | Alert address and the welcome email text, with a test send |
 | Account | Your name and password |

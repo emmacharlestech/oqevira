@@ -20,6 +20,18 @@
   });
 })();
 
+/* Posting an update with an email audience chosen: confirm who it goes to first */
+document.querySelectorAll('form:not([data-confirm]) .audience').forEach((picker) => {
+  picker.closest('form').addEventListener('submit', (e) => {
+    const choice = picker.querySelector('input[name="audience"]:checked');
+    if (!choice || choice.value === 'none') return;
+    const label = choice.value === 'one'
+      ? picker.querySelector('input[name="one_email"]').value || 'one person'
+      : choice.nextElementSibling.textContent.trim().replace(/\s+(\d+)$/, ' ($1 people)');
+    if (!window.confirm(`Save this update and email it to ${label} now?`)) e.preventDefault();
+  });
+});
+
 /* Forms with data-confirm ask before submitting (deletes) */
 document.querySelectorAll('form[data-confirm]').forEach((form) => {
   form.addEventListener('submit', (e) => {

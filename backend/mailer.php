@@ -15,12 +15,13 @@ function mime_header(string $text): string
 }
 
 /** Send a plain-text email, with an optional HTML version. Returns mail()'s result. */
-function send_mail(string $to, string $subject, string $text, ?string $html = null, string $replyTo = '', string $fromName = MAIL_FROM_NAME): bool
+function send_mail(string $to, string $subject, string $text, ?string $html = null, string $replyTo = '', string $fromName = MAIL_FROM_NAME, array $extraHeaders = []): bool
 {
     $headers = [
         'From: ' . mime_header($fromName) . ' <' . MAIL_FROM . '>',
         'MIME-Version: 1.0',
         'X-Mailer: Oqevira',
+        ...$extraHeaders,
     ];
     if ($replyTo !== '' && filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
         $headers[] = 'Reply-To: ' . $replyTo;
@@ -63,11 +64,12 @@ function text_to_html(string $text): string
     return $html;
 }
 
-/** Branded HTML wrapper used by the auto-reply. */
-function branded_html(string $title, string $bodyHtml): string
+/** Branded HTML wrapper used by the auto-reply and update emails. */
+function branded_html(string $title, string $bodyHtml, string $footerHtml = ''): string
 {
     global $CONFIG;
     $site = rtrim($CONFIG['site_url'] ?? 'https://oqevira.com', '/');
+    $footerHtml = $footerHtml ?: 'You\'re receiving this because you joined the Oqevira waitlist at oqevira.com. To be removed, reply to this email or write to <a href="mailto:support@oqevira.com" style="color:#646B7A">support@oqevira.com</a>.';
     return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>' . e($title) . '</title></head>'
         . '<body style="margin:0;padding:0;background:#F8F7F3">'
         . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F8F7F3"><tr><td align="center" style="padding:28px 14px">'
@@ -79,8 +81,64 @@ function branded_html(string $title, string $bodyHtml): string
         . '<tr><td style="padding:32px;font:16px/1.6 Arial,Helvetica,sans-serif;color:#14213D">' . $bodyHtml . '</td></tr>'
         . '<tr><td style="padding:0 32px 32px"><a href="' . e($site) . '" style="display:inline-block;padding:14px 26px;border-radius:999px;background:#FF5A4E;color:#14213D;font:700 15px Arial,Helvetica,sans-serif;text-decoration:none">Visit oqevira.com</a></td></tr>'
         . '<tr><td style="padding:20px 32px;background:#F8F7F3;font:12px/1.6 Arial,Helvetica,sans-serif;color:#646B7A">'
-        . 'You\'re receiving this because you joined the Oqevira waitlist at oqevira.com. To be removed, reply to this email or write to <a href="mailto:support@oqevira.com" style="color:#646B7A">support@oqevira.com</a>.'
+        . $footerHtml
         . '</td></tr></table></td></tr></table></body></html>';
+}
+
+/**
+ * Email one published update to one person on the waitlist, personally addressed,
+ * with an unsubscribe link (and List-Unsubscribe header for one-click in Gmail etc.).
+ */
+function send_update_email(array $update, array $signup): bool
+{
+    global $CONFIG;
+    $site = rtrim($CONFIG['site_url'], '/');
+    $unsub = unsubscribe_url((int) $signup['id']);
+    $hi = 'Hi ' . first_name($signup['name']) . ',';
+
+    // Drafts can be emailed too (email-only news), so only link to the website when it's published there.
+    $live = !empty($update['is_published']);
+    $text = $hi . "\n\n" . trim($update['body']) . "\n\n" . ($live ? "Read it on the website: $site/#news\n\n" : '')
+        . "The Oqevira team\n\n—\nYou're receiving this because you joined the Oqevira waitlist. Unsubscribe from updates: $unsub";
+
+    $img = $update['image'] !== ''
+        ? '<img src="' . e($site . '/' . $update['image']) . '" alt="" width="496" style="display:block;width:100%;height:auto;border:0;border-radius:14px;margin:0 0 22px">'
+        : '';
+    $body = $img
+        . '<h1 style="margin:0 0 18px;font:800 24px/1.25 Arial,Helvetica,sans-serif;color:#14213D">' . e($update['title']) . '</h1>'
+        . '<p style="margin:0 0 16px">' . e($hi) . '</p>'
+        . text_to_html($update['body'])
+        . '<p style="margin:0">The Oqevira team</p>';
+    $footer = 'You\'re receiving this because you joined the Oqevira waitlist at oqevira.com. '
+        . '<a href="' . e($unsub) . '" style="color:#646B7A">Unsubscribe from updates</a>.';
+
+    return send_mail($signup['email'], $update['title'], $text, branded_html($update['title'], $body, $footer), MAIL_FROM, MAIL_FROM_NAME, [
+        'List-Unsubscribe: <' . $unsub . '>, <mailto:support@oqevira.com?subject=Unsubscribe>',
+        'List-Unsubscribe-Post: List-Unsubscribe=One-Click',
+    ]);
+}
+
+/**
+ * The people an update email would go to: one role (or everyone), or a single email address.
+ * Unsubscribed people and anyone who already received this update are left out.
+ */
+function update_recipients(int $updateId, string $audience, string $oneEmail = '', ?int $limit = null): array
+{
+    $sql = 'SELECT s.id, s.name, s.email FROM signups s
+        WHERE s.unsubscribed = 0
+          AND NOT EXISTS (SELECT 1 FROM update_sends x WHERE x.update_id = ? AND x.signup_id = s.id)';
+    $args = [$updateId];
+    if ($audience === 'one') {
+        $sql .= ' AND s.email = ?';
+        $args[] = strtolower($oneEmail);
+    } elseif ($audience !== 'all') {
+        $sql .= ' AND s.role = ?';
+        $args[] = $audience;
+    }
+    $sql .= ' ORDER BY s.id' . ($limit ? ' LIMIT ' . (int) $limit : '');
+    $stmt = db()->prepare($sql);
+    $stmt->execute($args);
+    return $stmt->fetchAll();
 }
 
 /** Send the "you're on the list" email to someone who just signed up. */

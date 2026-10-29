@@ -225,6 +225,33 @@ code { padding: 1px 6px; border-radius: 4px; background: var(--sand); font-size:
 .ucard__meta { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
 .ucard__title { font-size: 1.1rem; font-weight: 800; letter-spacing: -.01em; }
 .ucard__text { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
+.ucard__sent { font-weight: 700; color: var(--ok); }
+.ucard__email { margin-top: 4px; border-top: 1px solid var(--line); }
+.ucard__email summary { cursor: pointer; display: flex; align-items: center; min-height: 44px; font-weight: 800; font-size: 14px; color: var(--navy); }
+.ucard__email .form { padding-top: 4px; }
+.badge--muted { background: var(--sand); color: var(--muted); }
+
+/* "Email it to" audience picker */
+.audience { margin: 0; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--ivory); display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.audience legend { float: left; width: 100%; margin-bottom: 4px; padding: 0; font-weight: 700; font-size: 14px; color: var(--ink); }
+.audience.is-invalid { border-color: var(--error); }
+.audience__opt { position: relative; display: inline-flex; cursor: pointer; }
+.audience__opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.audience__opt span {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--white);
+  font-weight: 700; font-size: 14px; color: var(--navy); transition: background-color .2s, border-color .2s;
+}
+.audience__opt small { padding: 0 7px; border-radius: 999px; background: var(--sand); font-size: 12px; font-weight: 700; color: var(--navy); }
+.audience__opt input:checked + span { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.audience__opt input:checked + span small { background: rgba(255, 255, 255, .2); color: var(--white); }
+.audience__opt input:focus-visible + span { outline: 2.5px solid var(--coral); outline-offset: 2px; }
+.audience__opt input:disabled + span { opacity: .45; cursor: default; }
+.audience__one { flex-basis: 100%; }
+.audience__one input { width: 100%; min-height: 46px; padding: 10px 12px; font: inherit; font-size: 16px; color: var(--ink); background: var(--white); border: 1px solid var(--line); border-radius: 10px; }
+.audience__one input:focus { outline: none; border-color: var(--coral); box-shadow: 0 0 0 3px rgba(255, 90, 78, .22); }
+.audience:not(:has(input[value="one"]:checked)) .audience__one { display: none; }
+.audience .field__help, .audience .field__error { flex-basis: 100%; margin: 4px 0 0; }
 @media (min-width: 640px) { .ucard { grid-template-columns: 220px minmax(0, 1fr); } }
 
 /* Gallery */

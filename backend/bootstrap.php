@@ -32,8 +32,10 @@ const INTERESTS      = ['Flights', 'Hotels', 'Holiday homes', 'Car hire', 'Resta
 const FREQUENCIES    = ['Once a year or less', '2-3 times a year', '4 or more times a year', 'Mostly for work'];
 const SOURCES        = ['Instagram', 'TikTok', 'YouTube', 'A friend or family member', 'Search engine', 'Other'];
 const SIGNUP_STATUSES = ['new' => 'New', 'contacted' => 'Contacted'];
+/** Who an update email can go to: everyone, or one waitlist role. */
+const AUDIENCES = ['all' => 'Everyone', 'Traveller' => 'Travellers', 'Tour guide' => 'Tour guides', 'Travel business' => 'Travel businesses'];
 
-const SCHEMA_VERSION = 1;
+const SCHEMA_VERSION = 2;
 
 /** Lazily-opened SQLite connection; creates and seeds the database on first use. */
 function db(): PDO
@@ -56,16 +58,34 @@ function db(): PDO
     ]);
     $pdo->exec('PRAGMA busy_timeout = 5000');
     $pdo->exec('PRAGMA foreign_keys = ON');
-    if ((int) $pdo->query('PRAGMA user_version')->fetchColumn() < SCHEMA_VERSION) {
-        migrate($pdo);
+    $version = (int) $pdo->query('PRAGMA user_version')->fetchColumn();
+    if ($version < SCHEMA_VERSION) {
+        $pdo->beginTransaction();
+        if ($version < 1) migrate_v1($pdo);
+        if ($version < 2) migrate_v2($pdo);
+        $pdo->exec('PRAGMA user_version = ' . SCHEMA_VERSION);
+        $pdo->commit();
     }
     return $pdo;
 }
 
-function migrate(PDO $pdo): void
+/** v2: update emails to the waitlist, with unsubscribe. */
+function migrate_v2(PDO $pdo): void
+{
+    $pdo->exec(<<<'SQL'
+        ALTER TABLE signups ADD COLUMN unsubscribed INTEGER NOT NULL DEFAULT 0;
+        CREATE TABLE IF NOT EXISTS update_sends (
+            update_id INTEGER NOT NULL REFERENCES updates (id) ON DELETE CASCADE,
+            signup_id INTEGER NOT NULL REFERENCES signups (id) ON DELETE CASCADE,
+            sent_at TEXT NOT NULL,
+            PRIMARY KEY (update_id, signup_id)
+        );
+    SQL);
+}
+
+function migrate_v1(PDO $pdo): void
 {
     global $CONFIG;
-    $pdo->beginTransaction();
     $pdo->exec(<<<'SQL'
         CREATE TABLE IF NOT EXISTS admins (
             id INTEGER PRIMARY KEY,
@@ -151,9 +171,6 @@ function migrate(PDO $pdo): void
             $ins->execute([$t, $s, $img, $alt, $i + 1, now()]);
         }
     }
-
-    $pdo->exec('PRAGMA user_version = ' . SCHEMA_VERSION);
-    $pdo->commit();
 }
 
 function now(): string
@@ -253,6 +270,19 @@ function whatsapp_digits(string $phone): string
 function format_date(?string $value, string $format = 'j M Y, g:ia'): string
 {
     return $value ? date($format, strtotime($value)) : '—';
+}
+
+/** Signed token for a sign-up's unsubscribe link (no login needed, can't be guessed). */
+function unsubscribe_token(int $signupId): string
+{
+    global $CONFIG;
+    return substr(hash_hmac('sha256', 'unsubscribe:' . $signupId, $CONFIG['app_secret']), 0, 32);
+}
+
+function unsubscribe_url(int $signupId): string
+{
+    global $CONFIG;
+    return rtrim($CONFIG['site_url'], '/') . '/unsubscribe.php?id=' . $signupId . '&t=' . unsubscribe_token($signupId);
 }
 
 function first_name(string $name): string

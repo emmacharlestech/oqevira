@@ -33,6 +33,10 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
             if ($ok) $pdo->prepare('UPDATE signups SET autoreply_sent = 1 WHERE id = ?')->execute([$id]);
             flash($ok ? 'Welcome email sent again to ' . $row['email'] . '.' : 'The server couldn’t send the email. Please try again later.', $ok ? 'success' : 'error');
             break;
+        case 'resubscribe':
+            $pdo->prepare('UPDATE signups SET unsubscribed = 0 WHERE id = ?')->execute([$id]);
+            flash($row['name'] . ' will receive update emails again.');
+            break;
         case 'delete':
             $pdo->prepare('DELETE FROM signups WHERE id = ?')->execute([$id]);
             flash($row['name'] . ' was removed from the waitlist.');
@@ -122,6 +126,9 @@ admin_header('Waitlist', $admin, 'signups');
             </span>
             <span class="inbox__side">
               <span class="badge badge--<?= e($r['status']) ?>"><?= e(SIGNUP_STATUSES[$r['status']] ?? $r['status']) ?></span>
+<?php if ($r['unsubscribed']): ?>
+              <span class="badge badge--muted">Unsubscribed</span>
+<?php endif; ?>
               <span class="inbox__date"><?= e(format_date($r['created_at'], 'j M Y, g:ia')) ?></span>
             </span>
           </summary>
@@ -142,6 +149,7 @@ admin_header('Waitlist', $admin, 'signups');
               <div><dt>Travels</dt><dd><?= e($r['frequency'] ?: '—') ?></dd></div>
               <div><dt>Heard via</dt><dd><?= e($r['heard'] ?: '—') ?></dd></div>
               <div><dt>Emails</dt><dd><?= $r['autoreply_sent'] ? 'Welcome email sent' : 'Welcome email not sent' ?> · <?= $r['notified'] ? 'support inbox notified' : 'support inbox not notified' ?></dd></div>
+              <div><dt>Update emails</dt><dd><?= $r['unsubscribed'] ? 'Unsubscribed. They won’t receive update emails.' : 'Subscribed' ?></dd></div>
             </dl>
 <?php if ($r['message'] !== ''): ?>
             <h3 class="card__sub">Their message</h3>
@@ -170,6 +178,14 @@ admin_header('Waitlist', $admin, 'signups');
                 <input type="hidden" name="back" value="<?= e($back) ?>">
                 <button class="btn btn--sm" name="action" value="resend">Resend welcome email</button>
               </form>
+<?php if ($r['unsubscribed']): ?>
+              <form method="post" data-confirm="Only do this if <?= e(first_name($r['name'])) ?> asked to get update emails again. Continue?">
+                <?= csrf_field() ?>
+                <input type="hidden" name="id" value="<?= (int) $r['id'] ?>">
+                <input type="hidden" name="back" value="<?= e($back) ?>">
+                <button class="btn btn--sm" name="action" value="resubscribe">Resubscribe to updates</button>
+              </form>
+<?php endif; ?>
               <form method="post" data-confirm="Remove <?= e($r['name']) ?> from the waitlist? This can't be undone.">
                 <?= csrf_field() ?>
                 <input type="hidden" name="id" value="<?= (int) $r['id'] ?>">
